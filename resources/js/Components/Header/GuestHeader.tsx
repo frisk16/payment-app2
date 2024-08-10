@@ -27,11 +27,11 @@ const GuestHeader: FC<Props> = memo((props) => {
                             <HeaderLinkButton href={route("login")}>ログイン</HeaderLinkButton>
                         )}
                         
-                        {route().current("register") ? (   
+                        {/* {route().current("register") ? (   
                             <HeaderActiveLinkButton>会員登録</HeaderActiveLinkButton>
                         ) : (
                             <HeaderLinkButton href={route("register")}>会員登録</HeaderLinkButton>
-                        )}
+                        )} */}
 
                     </Box>
                 </Flex>

@@ -88,7 +88,7 @@ const Login: FC<Props> = memo((props) => {
                     </CardBody>
                 </Card>
                 
-                <Center mt={12}>
+                {/* <Center mt={12}>
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
@@ -97,7 +97,7 @@ const Login: FC<Props> = memo((props) => {
                             パスワードをお忘れですか？
                         </Link>
                     )}
-                </Center>
+                </Center> */}
 
             </Container>
 
