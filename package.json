@@ -30,6 +30,9 @@
     "dependencies": {
         "@chakra-ui/icons": "^2.1.1",
         "@chakra-ui/react": "^2.8.2",
-        "@inertiajs/inertia-react": "^0.8.1"
+        "@emotion/react": "^11.13.0",
+        "@emotion/styled": "^11.13.0",
+        "@inertiajs/inertia-react": "^0.8.1",
+        "framer-motion": "^11.3.24"
     }
 }
