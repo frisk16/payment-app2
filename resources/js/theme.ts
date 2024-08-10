@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 
-const chakraStyle = extendTheme({
+const theme = extendTheme({
     styles: {
         global: {
             body: {
@@ -12,4 +12,4 @@ const chakraStyle = extendTheme({
     }
 })
 
-export default chakraStyle;
+export default theme;
