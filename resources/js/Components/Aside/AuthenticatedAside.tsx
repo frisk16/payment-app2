@@ -5,7 +5,7 @@ import AsideLinkButton from "@/Components/Aside/AsideLinkButton";
 import { ArrowLeftIcon, CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box, Heading } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 import useAccordionOption from "@/Fooks/useAccordionOption";
 
 const AuthenticatedAside: FC = memo(() => {
@@ -57,9 +57,7 @@ const AuthenticatedAside: FC = memo(() => {
                             title="カテゴリー詳細"
                             leftIcon={<CalendarIcon />}
                         >
-                            <AsideAccordionButton href={route("dashboard")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
-                            <AsideAccordionButton href={route("dashboard")} title="交通費" />
-                            <AsideAccordionButton href={route("dashboard")} title="生活費" />
+                            <AsideAccordionButton href={route("categories.setting")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
                         </AsideAccordionItem>
 
                         <AsideAccordionItem
@@ -67,8 +65,6 @@ const AuthenticatedAside: FC = memo(() => {
                             leftIcon={<QuestionIcon />}
                         >
                             <AsideAccordionButton href={route("dashboard")} title="支払い方法管理" rightIcon={<SettingsIcon />} />
-                            <AsideAccordionButton href={route("dashboard")} title="Suica" />
-                            <AsideAccordionButton href={route("dashboard")} title="クレジットカード" />
                         </AsideAccordionItem>
 
                         <AsideAccordionItem

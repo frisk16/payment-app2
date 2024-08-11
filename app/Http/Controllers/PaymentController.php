@@ -23,11 +23,13 @@ class PaymentController extends Controller
             'date' => ['required', 'string'],
         ], [
             'name.required' => '入力必須',
+            'name.string' => '使用できない文字が含まれています',
             'name.max' => ':max 文字まで',
             'price.required' => '入力必須',
             'price.integer' => '整数で入力',
             'price.min' => '￥ :min 円以上',
-            'date.required' => '入力必須'
+            'date.required' => '入力必須',
+            'date.string' => '使用できない文字が含まれています',
         ]);
     }
 

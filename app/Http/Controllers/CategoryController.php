@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+
+class CategoryController extends Controller
+{
+    private function validator($data)
+    {
+        return Validator::make($data, [
+            'name', ['required', 'max:5', 'string'],
+        ], [
+            'name.required' => '入力必須です',
+            'name.max' => ':max 文字まで',
+            'name.string' => '使用できない文字が含まれています',
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function setting_page()
+    {
+        //
+        return Inertia::render('Category/SettingPage');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Category $category)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Category $category)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Category $category)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Category $category)
+    {
+        //
+    }
+}
