@@ -17,8 +17,8 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return to_route("payments.current");
+})->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'edit')->name('profile.edit');
@@ -28,6 +28,7 @@ Route::middleware('auth')->controller(ProfileController::class)->group(function 
 
 Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->group(function() {
     Route::get('/categories', 'setting_page')->name('categories.setting');
+    Route::get('/categories/api/get', 'get_categories')->name('categories.get');
 });
 
 Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function() {

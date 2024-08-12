@@ -1,11 +1,11 @@
 import AsideAccordionButton from "@/Components/Aside/AsideAccordionButton";
 import AsideAccordionItem from "@/Components/Aside/AsideAccordionItem";
-import AsideLinkButton from "@/Components/Aside/AsideLinkButton";
 import ApplicationLogo from "@/Components/Default/ApplicationLogo";
-import { ArrowLeftIcon, CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
+import Loading from "@/Components/Progress/Loading";
+import { CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -16,9 +16,15 @@ type Props = {
 const MenuDrawer: FC<Props> = memo((props) => {
     const { isOpen, onClose, accordionIndex } = props;
 
+    const [logoutProcessing, setLogoutProcessing] = useState(false);
+
     const logout = () => {
+        setLogoutProcessing(true);
         axios.post(route("logout"))
-        .finally(() => location.reload());
+        .finally(() => {
+            setLogoutProcessing(false);
+            location.reload();
+        });
     };
 
     return (
@@ -38,14 +44,12 @@ const MenuDrawer: FC<Props> = memo((props) => {
                     </Box>
                 </DrawerHeader>
                 <DrawerBody p={0} bg="gray.300">
-                    <Box>
-                        <AsideLinkButton
-                            href={route("dashboard")}
-                            leftIcon={<ArrowLeftIcon />}
-                        >
-                            ホームヘ
-                        </AsideLinkButton>
+                    
+                    {logoutProcessing && (
+                        <Loading />
+                    )}
 
+                    <Box>
                         <Accordion defaultIndex={accordionIndex} allowMultiple>
 
                             <AsideAccordionItem

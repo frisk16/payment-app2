@@ -31,6 +31,18 @@ class CategoryController extends Controller
     }
 
     /**
+     * カテゴリー取得
+     */
+    public function get_categories()
+    {
+        $categories = Auth::user()->categories()->get();
+
+        return response()->json([
+            'categories' => $categories,
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

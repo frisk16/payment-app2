@@ -16,9 +16,9 @@ const GuestHeader: FC<Props> = memo((props) => {
         <header>
             <Box bg="white" h={16} px={{ base: 4, lg: 64 }} borderBottom="1px solid #ccc">
                 <Flex alignItems="center" gap={4} h={16}>
-                    <Link href="/">
+                    <Box>
                         <ApplicationLogo height={32} />
-                    </Link>
+                    </Box>
                     <Box>
 
                         {route().current("login") ? (

@@ -86,7 +86,7 @@ class PaymentController extends Controller
             $payments = $base_payments
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(10);
+                ->paginate(15);
         } else {
             $payments = $base_payments
                 ->where('name', 'LIKE', "%{$keyword}%")
@@ -94,7 +94,7 @@ class PaymentController extends Controller
                 ->where('price', '<=', $max_price)
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(10);
+                ->paginate(15);
         }
         
         return response()->json([

@@ -30,14 +30,14 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
                 borderBottom="1px solid #ccc"
             >
                 <Flex alignItems="center" gap={4} h={16}>
-                    <Link href="/">
-                        <ApplicationLogo height={32} />
-                    </Link>
                     <Box>
-                        {route().current("dashboard") ? (
+                        <ApplicationLogo height={32} />
+                    </Box>
+                    <Box>
+                        {route().current("payments.current") ? (
                             <HeaderActiveLinkButton>ホーム</HeaderActiveLinkButton>
                         ) : (
-                            <HeaderLinkButton href={route("dashboard")}>ホーム</HeaderLinkButton>
+                            <HeaderLinkButton href={route("payments.current")}>ホーム</HeaderLinkButton>
                         )}
                         
                     </Box>

@@ -1,23 +1,32 @@
 import ApplicationLogo from "@/Components/Default/ApplicationLogo";
 import AsideAccordionButton from "@/Components/Aside/AsideAccordionButton";
 import AsideAccordionItem from "@/Components/Aside/AsideAccordionItem";
-import AsideLinkButton from "@/Components/Aside/AsideLinkButton";
-import { ArrowLeftIcon, CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
+import { CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box, Heading } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import useAccordionOption from "@/Fooks/useAccordionOption";
+import Loading from "@/Components/Progress/Loading";
 
 const AuthenticatedAside: FC = memo(() => {
     const { accordionIndex } = useAccordionOption();
+    const [logoutProcessing, setLogoutProcessing] = useState(false);
 
     const logout = () => {
+        setLogoutProcessing(true);
         axios.post(route("logout"))
-        .finally(() => location.reload());
+        .finally(() => {
+            setLogoutProcessing(false);
+            location.reload();
+        });
     };
     
     return (
         <aside>
+            {logoutProcessing && (
+                <Loading />
+            )}
+
             <Box
                 display={{ base: "none", lg: "block" }}
                 pos="fixed"
@@ -33,13 +42,6 @@ const AuthenticatedAside: FC = memo(() => {
                 </Box>
 
                 <Box>
-                    <AsideLinkButton
-                        href={route("dashboard")}
-                        leftIcon={<ArrowLeftIcon />}
-                    >
-                        ホームヘ
-                    </AsideLinkButton>
-
                     <Accordion defaultIndex={accordionIndex} allowMultiple>
 
                         <AsideAccordionItem
