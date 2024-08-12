@@ -70,9 +70,7 @@ const MenuDrawer: FC<Props> = memo((props) => {
                                 title="支払い方法詳細"
                                 leftIcon={<QuestionIcon />}
                             >
-                                <AsideAccordionButton href={route("dashboard")} title="支払い方法管理" rightIcon={<SettingsIcon />} />
-                                <AsideAccordionButton href={route("dashboard")} title="Suica" />
-                                <AsideAccordionButton href={route("dashboard")} title="クレジットカード" />
+                                <AsideAccordionButton title="支払い方法管理" rightIcon={<SettingsIcon />} />
                             </AsideAccordionItem>
 
                             <AsideAccordionItem
@@ -80,7 +78,7 @@ const MenuDrawer: FC<Props> = memo((props) => {
                                 leftIcon={<SettingsIcon />}    
                             >
                                 <AsideAccordionButton href={route("profile.edit")} title="マイページ" />
-                                <AsideAccordionButton href={route("dashboard")} onClick={logout} title="ログアウト" />
+                                <AsideAccordionButton onClick={logout} title="ログアウト" />
                             </AsideAccordionItem>
                         </Accordion>
                     </Box>
