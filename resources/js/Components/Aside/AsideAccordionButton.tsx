@@ -4,20 +4,20 @@ import { FC, ReactNode } from "react";
 
 type Props = {
     title: string;
-    href: string;
+    href?: string;
     rightIcon?: ReactNode;
     onClick?: () => void;
 };
 
 const AsideAccordionButton: FC<Props> = (props) => {
-    const { title, href, rightIcon = undefined, onClick = undefined } = props;
+    const { title, href = "#", rightIcon = undefined, onClick = undefined } = props;
     const { pathName } = useUrl();
 
     let bg = undefined;
     let color = undefined;
     let hover = 0.5;
 
-    const hrefPathname = new URL(href).pathname;
+    const hrefPathname = href !== "#" ? new URL(href).pathname : "#";
     if (hrefPathname === pathName) {
         bg = "blue.400";
         color = "white";
