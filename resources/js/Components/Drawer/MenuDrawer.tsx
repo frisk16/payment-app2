@@ -37,7 +37,7 @@ const MenuDrawer: FC<Props> = memo((props) => {
                         <Heading size="sm">帳簿管理サイト</Heading>
                     </Box>
                 </DrawerHeader>
-                <DrawerBody p={0}>
+                <DrawerBody p={0} bg="gray.300">
                     <Box>
                         <AsideLinkButton
                             href={route("dashboard")}
@@ -63,9 +63,7 @@ const MenuDrawer: FC<Props> = memo((props) => {
                                 title="カテゴリー詳細"
                                 leftIcon={<CalendarIcon />}
                             >
-                                <AsideAccordionButton href={route("dashboard")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
-                                <AsideAccordionButton href={route("dashboard")} title="交通費" />
-                                <AsideAccordionButton href={route("dashboard")} title="生活費" />
+                                <AsideAccordionButton href={route("categories.setting")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
                             </AsideAccordionItem>
 
                             <AsideAccordionItem

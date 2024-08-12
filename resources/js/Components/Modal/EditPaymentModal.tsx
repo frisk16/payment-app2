@@ -2,7 +2,6 @@ import DisableButton from "@/Components/Button/DisableButton";
 import SuccessButton from "@/Components/Button/SuccessButton";
 import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
-import usePayment from "@/Fooks/Api/usePayment";
 import { Payment } from "@/types/api/Payment";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { FormControl, FormErrorMessage, Heading, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";

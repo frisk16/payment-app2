@@ -53,7 +53,7 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
                                 {Math.round((totalPrice / 300000) * 100)}%
                             </Text> / 100% 消費
                         </Text>
-                        <Box w="full" mt={16}>
+                        <Box w="full" mt={{ base: 6, md: 16 }}>
                             <AddButton
                                 onClick={handleOpenModal}
                                 w={{ base: "full" }}

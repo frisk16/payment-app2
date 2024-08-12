@@ -1,27 +1,38 @@
+import DisableButton from "@/Components/Button/DisableButton";
 import PrimaryButton from "@/Components/Button/PrimaryButton";
 import PriceSearchForm from "@/Components/Form/PriceSearchForm";
 import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import SSelect from "@/Components/Form/SSelect";
-import PaymentSearchModal from "@/Components/Modal/PaymentSearchModal";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
-import { Box, Card, CardBody, Flex, FormControl, Stack, useDisclosure } from "@chakra-ui/react";
+import { Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
 import { FC, memo, useState } from "react";
 
-const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
-    const { year, month, paymentData, setPaymentData } = props;
+type Props = {
+    isOpen: boolean;
+    onClose: () => void;
+};
+
+const PaymentSearchModal: FC<Props & PaymentsPageProps> = memo((props) => {
+    const { isOpen, onClose, paymentData, setPaymentData, year, month } = props;
 
     const [order, setOrder] = useState("DESC");
-    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <Card h="full">
-            <CardBody>
+        <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} isCentered>
+            <ModalOverlay />
+            <ModalContent mx={4}>   
+                
+                <ModalHeader>
+                    <Heading size="sm">
+                        支払いデータ検索
+                    </Heading>
+                </ModalHeader>
+                <ModalCloseButton />
 
-                {/* PC Style */}
-                <Box display={{ base: "none", md: "block" }}>
+                <ModalBody>
                     <Stack spacing={4}>
-                        <FormControl>
+                    <FormControl>
                             <SFormLabel>ワード検索</SFormLabel>
                             <SInput
                                 type="text"
@@ -30,7 +41,7 @@ const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
                                 placeholder="タイトル名"
                             />
                         </FormControl>
-                        <Flex gap={8} direction={{ base: "column", md: "row" }} justifyContent="center">
+                        <Flex gap={8} direction="column" justifyContent="center">
                             
                             <FormControl>
                                 <SFormLabel>日付</SFormLabel>
@@ -44,33 +55,22 @@ const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
                                 paymentData={paymentData}
                                 setPaymentData={setPaymentData}
                             />
-
                         </Flex>
                     </Stack>
-                    <FormControl mt={8} textAlign="right">
-                        <PrimaryButton
+                </ModalBody>
+
+                <ModalFooter gap={2}>
+                    <DisableButton onClick={onClose}>閉じる</DisableButton>
+                    <PrimaryButton
                             as="a"
-                            w={{ base: "100%", md: "120px" }}
                             href={`?year=${year}&month=${month}&keyword=${paymentData!.keyword}&maxPrice=${paymentData!.maxPrice}&minPrice=${paymentData!.minPrice}&order=${order}`}
                         >
                             検索
-                        </PrimaryButton>
-                    </FormControl>
-                </Box>
-
-                {/* Phone Style */}
-                <Box display={{ base: "block", md: "none" }}>
-                    <PrimaryButton w="full" onClick={onOpen}>検索フォーム表示</PrimaryButton>
-                </Box>
-            </CardBody>
-
-            <PaymentSearchModal
-                isOpen={isOpen}
-                onClose={onClose}
-                {...props}
-            />
-        </Card>
+                    </PrimaryButton>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
     )
 });
 
-export default PaymentsSearchForm;
+export default PaymentSearchModal;

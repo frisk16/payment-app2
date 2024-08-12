@@ -32,7 +32,7 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
                 />
             )}
 
-            <Box mt={{ base: "580px", md: "350px", xl: "84px" }}>
+            <Box mt={{ base: "280px", md: "350px", xl: "84px" }}>
                 {payments.map((payment) => (
                     <Card borderRadius={0} mb={3}>
                         <CardHeader p={{ base: 2, md: 4 }} fontSize="0.8em">
