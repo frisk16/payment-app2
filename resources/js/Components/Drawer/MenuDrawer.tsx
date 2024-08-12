@@ -22,7 +22,6 @@ const MenuDrawer: FC<Props> = memo((props) => {
         setLogoutProcessing(true);
         axios.post(route("logout"))
         .finally(() => {
-            setLogoutProcessing(false);
             location.reload();
         });
     };

@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(to_route('payments.current', absolute: false));
+        return redirect()->intended(route('payments.current', absolute: false));
     }
 
     /**
