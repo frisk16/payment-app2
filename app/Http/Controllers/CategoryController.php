@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
@@ -27,7 +28,11 @@ class CategoryController extends Controller
     public function setting_page()
     {
         //
-        return Inertia::render('Category/SettingPage');
+        $date = Carbon::now();
+
+        return Inertia::render('Category/SettingPage', [
+            'year' => $date->year,
+        ]);
     }
 
     /**

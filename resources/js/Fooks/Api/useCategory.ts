@@ -19,6 +19,18 @@ const useCategory = () => {
     const [categories, setCategories] = useState<Array<Category>>([]);
     const { getMessage } = useMessage();
 
+    const resetData = useCallback(() => {
+        setCategoryData({
+            name: "",
+        });
+    }, []);
+
+    const resetError = useCallback(() => {
+        setCategoryError({
+            name: "",
+        });
+    }, []);
+
     const getCategories = useCallback(() => {
         setCategoryProcessing(true);
         axios.get(route("categories.get"))
@@ -37,6 +49,8 @@ const useCategory = () => {
         categoryData,
         categoryError,
         categories,
+        resetData,
+        resetError,
         setCategoryData,
         getCategories
     };

@@ -7,16 +7,19 @@ import { FC, useEffect } from "react";
 
 type Props = {
     auth: PageProps['auth'];
+    year: number;
 };
 
 const SettingPage: FC<Props> = (props) => {
-    const { auth } = props;
+    const { auth, year } = props;
 
     const {
         categoryProcessing,
         categoryData,
         categoryError,
         categories,
+        resetData,
+        resetError,
         setCategoryData,
         getCategories
     } = useCategory();
@@ -28,10 +31,13 @@ const SettingPage: FC<Props> = (props) => {
             <Head title="カテゴリー設定" />
 
             <CategoriesPageLayout
+                year={year}
                 categoryProcessing={categoryProcessing}
                 categoryData={categoryData}
                 categoryError={categoryError}
                 categories={categories}
+                resetData={resetData}
+                resetError={resetError}
                 setCategoryData={setCategoryData}
             />
             

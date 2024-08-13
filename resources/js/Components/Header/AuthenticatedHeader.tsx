@@ -62,7 +62,7 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
                         _hover={{ color: "teal" }}
                     />
 
-                    <Heading size="sm">{title}</Heading>
+                    <Heading size={{ base: "xs", md: "sm" }}>{title}</Heading>
                     <Box ms="auto">
                         {route().current("payments.month_1to3") && (
                             ["1", "2", "3"].map((m) => (

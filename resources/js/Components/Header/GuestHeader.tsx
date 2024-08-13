@@ -38,7 +38,7 @@ const GuestHeader: FC<Props> = memo((props) => {
             </Box>
             <Box bg="white" h={16} px={{ base: 4, lg: 64 }}>
                 <Flex h={16} alignItems="center">
-                    <Heading size="sm">{title}</Heading>
+                    <Heading size={{ base: "xs", md: "sm" }}>{title}</Heading>
                 </Flex>
             </Box>
         </header>
