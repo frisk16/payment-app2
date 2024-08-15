@@ -7,6 +7,7 @@ import axios from "axios";
 import { FC, memo, useState } from "react";
 import useAccordionOption from "@/Fooks/useAccordionOption";
 import Loading from "@/Components/Progress/Loading";
+import AppIcon from "@/Components/Icon/AppIcon";
 
 const AuthenticatedAside: FC = memo(() => {
     const { accordionIndex } = useAccordionOption();
@@ -36,8 +37,8 @@ const AuthenticatedAside: FC = memo(() => {
                 w={60}
             >
                 <Box h={32} p={4} borderBottom="2px solid #55f">
-                    <ApplicationLogo height={64} />
-                    <Heading size="sm">帳簿管理サイト</Heading>
+                    <AppIcon fontSize={{ base: 48 }} />
+                    <Heading size="sm" mt={4} >帳簿管理サイト</Heading>
                 </Box>
 
                 <Box>

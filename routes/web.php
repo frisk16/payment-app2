@@ -29,6 +29,7 @@ Route::middleware('auth')->controller(ProfileController::class)->group(function 
 Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->group(function() {
     Route::get('/categories', 'setting_page')->name('categories.setting');
     Route::get('/categories/api/get', 'get_categories')->name('categories.get');
+    Route::post('/categories/api/store', 'store')->name('categories.store');
 });
 
 Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function() {
@@ -39,8 +40,9 @@ Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->g
     Route::get('/payments/month_10to12', 'month_10to12_page')->name('payments.month_10to12');
     Route::get('/payments/api/get', 'get_payments')->name('payments.get');
     Route::post('/payments/api/store', 'store')->name('payments.store');
-    Route::put('/payments/api/{id}/update', 'update')->name('payments.update');
+    Route::put('/payments/{id}/api/update', 'update')->name('payments.update');
     Route::put('/payments/api/destroy', 'destroy')->name('payments.destroy');
+    Route::get('/payments/{id}/api/get_categories', 'get_categories')->name('payments.get_categories');
 });
 
 require __DIR__.'/auth.php';

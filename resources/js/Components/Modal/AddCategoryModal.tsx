@@ -12,7 +12,18 @@ type Props = {
 };
 
 const AddCategoryModal: FC<Props & CategoriesPageProps> = memo((props) => {
-    const { isOpen, onClose, categories, categoryError, categoryData, categoryProcessing, setCategoryData, resetData, resetError } = props;
+    const {
+        isOpen,
+        onClose,
+        categories,
+        categoryError,
+        categoryData,
+        categoryProcessing,
+        setCategoryData,
+        resetData,
+        resetError,
+        addCategory
+    } = props;
 
     useEffect(() => {
         resetData();
@@ -20,7 +31,7 @@ const AddCategoryModal: FC<Props & CategoriesPageProps> = memo((props) => {
     }, [isOpen, categories]);        
     
     const handleAddCategory = () => {
-
+        addCategory({ categories, categoryData });
     };    
 
     return (

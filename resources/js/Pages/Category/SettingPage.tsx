@@ -21,7 +21,8 @@ const SettingPage: FC<Props> = (props) => {
         resetData,
         resetError,
         setCategoryData,
-        getCategories
+        getCategories,
+        addCategory,
     } = useCategory();
 
     useEffect(() => getCategories(), []);
@@ -39,6 +40,7 @@ const SettingPage: FC<Props> = (props) => {
                 resetData={resetData}
                 resetError={resetError}
                 setCategoryData={setCategoryData}
+                addCategory={addCategory}
             />
             
         </AuthenticatedLayout>

@@ -1,4 +1,5 @@
 import DeletePaymentAsideMenu from "@/Components/Aside/DeletePyamentAsideMenu";
+import PaymentCategory from "@/Components/Badge/PaymentCategory";
 import EditPaymentModal from "@/Components/Modal/EditPaymentModal";
 import Loading from "@/Components/Progress/Loading";
 import { Payment } from "@/types/api/Payment";
@@ -34,10 +35,10 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
 
             <Box mt={{ base: "280px", md: "350px", xl: "84px" }}>
                 {payments.map((payment) => (
-                    <Card borderRadius={0} mb={3}>
+                    <Card borderRadius={0} mb={3} key={payment.id}>
                         <CardHeader p={{ base: 2, md: 4 }} fontSize="0.8em">
                             <Flex justifyContent="space-between">
-                                <Text>カテゴリー：無し</Text>
+                                <PaymentCategory paymentId={payment.id} />
                                 <Text fontWeight="bold">{payment.date}</Text>
                             </Flex>
                         </CardHeader>

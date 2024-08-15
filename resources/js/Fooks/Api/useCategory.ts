@@ -4,11 +4,11 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 
 export type CategoryApiProps = {
-    categoryData: CategoryData | null;
+    categories?: Array<Category>;
+    categoryData?: CategoryData | null;
 };
 
 const useCategory = () => {
-
     const [categoryData, setCategoryData] = useState<CategoryData | null>({
         name: "",
     });
@@ -44,6 +44,33 @@ const useCategory = () => {
             .finally(() => setCategoryProcessing(false));
     }, []);
 
+    const addCategory = useCallback((props: CategoryApiProps) => {
+        const { categories, categoryData } = props;
+
+        setCategoryProcessing(true);
+        axios.post(route("categories.store"), {
+            categoryData
+        })
+        .then((res) => {
+            if (res.data.errors) {
+                getMessage({ title: "入力内容に誤りがあります", status: "warning" });
+                setCategoryError({
+                    name: res.data.errors.name,
+                });
+            } else {
+                getMessage({ title: "カテゴリー追加", status: "success" });
+                setCategories([...categories!, res.data.category]);
+                resetError();
+                resetData();
+            }
+        })
+        .catch((err) => {
+            getMessage({ title: "追加時にエラー発生", status: "error" });
+            console.log(err);
+        })
+        .finally(() => setCategoryProcessing(false));
+    }, []);
+
     return {
         categoryProcessing,
         categoryData,
@@ -52,7 +79,8 @@ const useCategory = () => {
         resetData,
         resetError,
         setCategoryData,
-        getCategories
+        getCategories,
+        addCategory,
     };
 };
 

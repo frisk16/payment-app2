@@ -1,5 +1,5 @@
-import ApplicationLogo from "@/Components/Default/ApplicationLogo";
 import GuestHeader from "@/Components/Header/GuestHeader";
+import AppIcon from "@/Components/Icon/AppIcon";
 import { Box, Center } from "@chakra-ui/react";
 import { FC, memo, ReactNode } from "react";
 
@@ -16,7 +16,7 @@ const GuestLayout: FC<Props> = memo((props) => {
             <GuestHeader title={title} />
 
             <Center my={{ base: 6, md: 16 }}>
-                <ApplicationLogo height={48} />
+                <AppIcon fontSize={{ base: 32, md: 48 }} />
             </Center>
             
             {children}

@@ -1,4 +1,5 @@
 import useMessage from "@/Fooks/useMessage";
+import { Category } from "@/types/api/Category";
 import { Payment, PaymentData, PaymentError, PaymentPageInfo } from "@/types/api/Payment";
 import axios from "axios";
 import { ChangeEvent, useCallback, useState } from "react";
@@ -32,12 +33,15 @@ const usePayment = () => {
         date: "",
     });
     const [payments, setPayments] = useState<Array<Payment>>([]);
+    const [categories, setCategories] = useState<Array<Category>>([]);
     const [paymentPageInfo, setPaymentPageInfo] = useState<PaymentPageInfo | null>(null);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
     const { getMessage } = useMessage();
 
 
-    // フォームデータ初期化
+    /**
+     * フォームデータ初期化
+     */
     const resetData = useCallback(() => {
         setPaymentData({
             name: "",
@@ -50,7 +54,9 @@ const usePayment = () => {
         });
     }, []);
 
-    // エラーメッセージ初期化
+    /**
+     * エラーメッセージ初期化
+     */
     const resetError = useCallback(() => {
         setPaymentError({
             name: "",
@@ -59,7 +65,9 @@ const usePayment = () => {
         });
     }, []);
 
-    // 削除用チェックボックス
+    /**
+     * 削除用チェックボックスイベント
+     */
     const onChangeDeleteIds = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         if (paymentData!.deleteIds.includes(Number(e.target.value))) {
             const newDeleteIds = paymentData!.deleteIds.filter((id) => id !== Number(e.target.value));
@@ -69,7 +77,9 @@ const usePayment = () => {
         }
     }, [paymentData!.deleteIds]);
 
-    // 月ごとのデータ取得
+    /**
+     * 月ごとのデータ取得
+     */
     const getCurrentPayments = useCallback((props: PaymentApiProps) => {
         const { year = 2024, month = 1, page = 1, paymentData = null, order = "DESC" } = props;
 
@@ -95,11 +105,14 @@ const usePayment = () => {
     }, []);
 
 
-    /**
+    /**-----------------------
      * データ操作
-     */
+    --------------------------*/
 
-    // データ追加
+
+    /**
+     * データ追加
+     */
     const addPayment = useCallback((props: PaymentApiProps) => {
         const { payments, paymentData = null, year = 2024, month = 1, resetData = null } = props;        
 
@@ -135,7 +148,9 @@ const usePayment = () => {
             .finally(() => setPaymentProcessing(false));        
     }, []);
 
-    // データ編集
+    /**
+     * データ編集
+     */
     const editPayment = useCallback((props: PaymentApiProps) => {
         const { payments, paymentData = null, paymentId = null, year = 2024, month = 1 } = props;
         
@@ -181,7 +196,9 @@ const usePayment = () => {
             .finally(() => setPaymentProcessing(false));
     }, []);
 
-    // データ削除
+    /**
+     * データ削除
+     */
     const deletePayment = useCallback((props: PaymentApiProps) => {
         const { payments, deleteIds = [], onClose = null, resetData = null } = props;
 
@@ -206,6 +223,17 @@ const usePayment = () => {
         .finally(() => setPaymentProcessing(false));
     }, []);
 
+    /**
+     * 各データ毎のカテゴリー取得
+     */
+    const getCategoryLists = useCallback((props: PaymentApiProps) => {
+        const { paymentId = null } = props;
+
+        axios.get(route("payments.get_categories", {id: paymentId}))
+            .then((res) => setCategories(res.data.categories))
+            .catch((err) => console.log(err));
+    }, []);
+
     return {
         paymentProcessing,
         paymentData,
@@ -220,6 +248,8 @@ const usePayment = () => {
         addPayment,
         editPayment,
         deletePayment,
+        getCategoryLists,
+        categories
     };
 };
 

@@ -1,6 +1,6 @@
 import AsideAccordionButton from "@/Components/Aside/AsideAccordionButton";
 import AsideAccordionItem from "@/Components/Aside/AsideAccordionItem";
-import ApplicationLogo from "@/Components/Default/ApplicationLogo";
+import AppIcon from "@/Components/Icon/AppIcon";
 import Loading from "@/Components/Progress/Loading";
 import { CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
@@ -38,8 +38,8 @@ const MenuDrawer: FC<Props> = memo((props) => {
                 <DrawerCloseButton />
                 <DrawerHeader p={0}>
                     <Box h={32} p={4} borderBottom="2px solid #55f">
-                        <ApplicationLogo height={64} />
-                        <Heading size="sm">帳簿管理サイト</Heading>
+                        <AppIcon fontSize={{ base: 48 }} />
+                        <Heading size="sm" mt={4} >帳簿管理サイト</Heading>
                     </Box>
                 </DrawerHeader>
                 <DrawerBody p={0} bg="gray.300">

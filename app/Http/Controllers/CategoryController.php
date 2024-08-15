@@ -14,7 +14,7 @@ class CategoryController extends Controller
     private function validator($data)
     {
         return Validator::make($data, [
-            'name', ['required', 'max:5', 'string'],
+            'name' => ['required', 'max:5', 'string'],
         ], [
             'name.required' => '入力必須です',
             'name.max' => ':max 文字まで',
@@ -47,13 +47,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -61,6 +54,22 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->categoryData;
+        $validator = $this->validator($data);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        $category = Category::create([
+            'user_id' => Auth::id(),
+            'name' => $data['name'],
+        ]);
+
+        return response()->json([
+            'category' => $category,
+        ]);
     }
 
     /**

@@ -1,12 +1,11 @@
-import ApplicationLogo from "@/Components/Default/ApplicationLogo";
 import MenuDrawer from "@/Components/Drawer/MenuDrawer";
 import HeaderActiveLinkButton from "@/Components/Header/HeaderActiveLinkButton";
 import HeaderLinkButton from "@/Components/Header/HeaderLinkButton";
+import AppIcon from "@/Components/Icon/AppIcon";
 import useAccordionOption from "@/Fooks/useAccordionOption";
 import { User } from "@/types";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, useDisclosure } from "@chakra-ui/react";
-import { Link } from "@inertiajs/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -31,7 +30,7 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
             >
                 <Flex alignItems="center" gap={4} h={16}>
                     <Box>
-                        <ApplicationLogo height={32} />
+                        <AppIcon />
                     </Box>
                     <Box>
                         {route().current("payments.current") ? (

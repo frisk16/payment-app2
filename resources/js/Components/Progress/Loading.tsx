@@ -17,7 +17,7 @@ const Loading: FC = () => {
                 color="blue.400"
                 emptyColor="gray.300"
             />
-            <Text>ロード中...</Text>
+            <Text>お待ちください</Text>
         </Center>
     )
 };

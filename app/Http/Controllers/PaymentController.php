@@ -170,4 +170,16 @@ class PaymentController extends Controller
             'count' => count($request->deleteIds),
         ]);
     }
+
+    /**
+     * 各データ毎のカテゴリータグ取得
+     */
+    public function get_categories($id)
+    {
+        $categories = Payment::find($id)->categories()->get();
+
+        return response()->json([
+            'categories' => $categories,
+        ]);
+    }
 }

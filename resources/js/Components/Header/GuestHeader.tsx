@@ -1,8 +1,7 @@
-import ApplicationLogo from "@/Components/Default/ApplicationLogo";
 import HeaderActiveLinkButton from "@/Components/Header/HeaderActiveLinkButton";
 import HeaderLinkButton from "@/Components/Header/HeaderLinkButton";
+import AppIcon from "@/Components/Icon/AppIcon";
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import { Link } from "@inertiajs/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -17,7 +16,7 @@ const GuestHeader: FC<Props> = memo((props) => {
             <Box bg="white" h={16} px={{ base: 4, lg: 64 }} borderBottom="1px solid #ccc">
                 <Flex alignItems="center" gap={4} h={16}>
                     <Box>
-                        <ApplicationLogo height={32} />
+                        <AppIcon />
                     </Box>
                     <Box>
 
