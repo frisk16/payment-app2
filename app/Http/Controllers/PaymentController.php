@@ -87,23 +87,25 @@ class PaymentController extends Controller
             $payments = $base_payments
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(15);
+                ->paginate(10);
 
-            $total_price = $base_payments->sum('price');
+            foreach ($base_payments->get() as $payment) {
+                $total_price += $payment->price;
+            }
         } else {
-            $payments = $base_payments
+            $param_payments = $base_payments
                 ->where('name', 'LIKE', "%{$keyword}%")
                 ->where('price', '>=', $min_price)
-                ->where('price', '<=', $max_price)
+                ->where('price', '<=', $max_price);
+
+            $payments = $param_payments
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(15);
+                ->paginate(10);
                 
-            $total_price = $base_payments
-                ->where('name', 'LIKE', "%{$keyword}%")
-                ->where('price', '>=', $min_price)
-                ->where('price', '<=', $max_price)
-                ->sum('price');
+            foreach ($param_payments as $payment) {
+                $total_price += $payment->price;
+            }
         }
     
         return response()->json([
