@@ -22,6 +22,7 @@ const Month1to3PaymentsPage: FC<Props> = memo((props) => {
         paymentProcessing,
         payments,
         paymentPageInfo,
+        totalPrice,
         paymentError,
         paymentData,
         setPaymentData,
@@ -47,6 +48,7 @@ const Month1to3PaymentsPage: FC<Props> = memo((props) => {
                 paymentProcessing={paymentProcessing}
                 payments={payments}
                 paymentPageInfo={paymentPageInfo}
+                totalPrice={totalPrice}
                 paymentError={paymentError}
                 paymentData={paymentData}
                 setPaymentData={setPaymentData}

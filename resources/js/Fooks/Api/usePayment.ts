@@ -36,6 +36,7 @@ const usePayment = () => {
     });
     const [payments, setPayments] = useState<Array<Payment>>([]);
     const [paymentPageInfo, setPaymentPageInfo] = useState<PaymentPageInfo | null>(null);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
     const { getMessage } = useMessage();
 
@@ -97,6 +98,7 @@ const usePayment = () => {
             .then((res) => {
                 setPayments(res.data.payments.data);
                 setPaymentPageInfo(res.data.payments);
+                setTotalPrice(res.data.totalPrice);
             })
             .catch((err) => {
                 getMessage({ title: "データが取得できませんでした", status: "error" });
@@ -241,6 +243,7 @@ const usePayment = () => {
     const toggleCategory = useCallback((props: PaymentApiProps) => {
         const { paymentId = null, data = [], setCurrentCategories = null } = props;
 
+        setPaymentProcessing(true);
         axios.put(route("payments.toggle_category", {id: paymentId}), {
             data
         })
@@ -255,7 +258,8 @@ const usePayment = () => {
         .catch((err) => {
             getMessage({ title: "タグ更新中にエラーが発生しました", status: "error" });
             console.log(err);
-        });
+        })
+        .finally(() => setPaymentProcessing(false));
     }, []);
 
     return {
@@ -268,6 +272,7 @@ const usePayment = () => {
         resetData,
         payments,
         paymentPageInfo,
+        totalPrice,
         getCurrentPayments,
         addPayment,
         editPayment,

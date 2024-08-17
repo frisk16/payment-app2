@@ -1,23 +1,25 @@
 import CategoryBadge from "@/Components/Badge/CategoryBadge";
 import DisableButton from "@/Components/Button/DisableButton";
 import SuccessButton from "@/Components/Button/SuccessButton";
+import NotFound from "@/Components/Default/NotFound";
 import SCheckbox from "@/Components/Form/SCheckbox";
 import useCategory from "@/Fooks/Api/useCategory";
 import { PaymentApiProps } from "@/Fooks/Api/usePayment";
 import { Category } from "@/types/api/Category";
-import { Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
+import { Box, Center, Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
 import { ChangeEvent, Dispatch, FC, memo, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
     paymentId: number;
     setCurrentCategories: Dispatch<SetStateAction<Array<Category>>>;
     toggleCategory: (props: PaymentApiProps) => void;
+    paymentProcessing: boolean;
     isOpen: boolean;
     onClose: () => void;
 };
 
 const ToggleCategoryModal: FC<Props> = memo((props) => {
-    const { paymentId, setCurrentCategories, toggleCategory, isOpen, onClose } = props;
+    const { paymentId, setCurrentCategories, toggleCategory, paymentProcessing, isOpen, onClose } = props;
 
     const [data, setData] = useState<Array<Number>>([]);
     const { categories, getCategories } = useCategory();
@@ -50,11 +52,18 @@ const ToggleCategoryModal: FC<Props> = memo((props) => {
                 <ModalBody>
                     <FormControl>
                         <Flex gap={4} flexWrap="wrap">
-                            {categories.map((category) => (
-                                <SCheckbox key={category.id} value={category.id} onChange={onChange} isChecked={data.includes(category.id)}>
-                                    <CategoryBadge fontSize={{ base: "0.9em" }}>{category.name}</CategoryBadge>
-                                </SCheckbox>
-                            ))}
+                            {categories[0] ? (
+                                categories.map((category) => (
+                                    <SCheckbox key={category.id} value={category.id} onChange={onChange} isChecked={data.includes(category.id)}>
+                                        <CategoryBadge fontSize={{ base: "0.9em" }}>{category.name}</CategoryBadge>
+                                    </SCheckbox>
+                                ))
+                            ) : (
+                                <Box mx="auto">
+                                    <NotFound />
+                                </Box>
+                            )}
+                            {}
                         </Flex>
                     </FormControl>
                 </ModalBody>
@@ -62,7 +71,13 @@ const ToggleCategoryModal: FC<Props> = memo((props) => {
                 <ModalFooter gap={2}>
 
                     <DisableButton onClick={onClose}>閉じる</DisableButton>
-                    <SuccessButton onClick={handleToggleCategory}>更新</SuccessButton>
+                    <SuccessButton
+                        onClick={handleToggleCategory}
+                        disabled={!categories[0] ?? paymentProcessing}
+                        loading={paymentProcessing}
+                    >
+                        更新
+                    </SuccessButton>
 
                 </ModalFooter>
             </ModalContent>

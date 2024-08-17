@@ -14,7 +14,7 @@ const PaymentCategory: FC<Props> = memo((props) => {
     const { paymentId } = props;
 
     const [currentCategories, setCurrentCategories] = useState<Array<Category>>([]);
-    const { getCategoryLists, toggleCategory } = usePayment();
+    const { getCategoryLists, toggleCategory, paymentProcessing } = usePayment();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => getCategoryLists({ paymentId, setCurrentCategories }), []);
@@ -22,8 +22,8 @@ const PaymentCategory: FC<Props> = memo((props) => {
     return (
         <div>
             <Flex onClick={onOpen} cursor="pointer" alignItems="center" gap={1}>
-                <EditIcon />
-                <Text fontSize="0.9em">カテゴリー：</Text>
+                <EditIcon color="green" fontSize="1.1em" />
+                <Text>カテゴリー：</Text>
                 {currentCategories[0] ? (
                         currentCategories.map((category) => (
                         <CategoryBadge key={category.id} fontSize={{ base: "0.8em", md: "1em" }}>{category.name}</CategoryBadge>
@@ -38,6 +38,7 @@ const PaymentCategory: FC<Props> = memo((props) => {
                 paymentId={paymentId}
                 setCurrentCategories={setCurrentCategories}
                 toggleCategory={toggleCategory}
+                paymentProcessing={paymentProcessing}
                 isOpen={isOpen}
                 onClose={onClose}
             />

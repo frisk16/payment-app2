@@ -3,21 +3,12 @@ import AddPaymentModal from "@/Components/Modal/AddPaymentModal";
 import PaymentCircularProgress from "@/Components/Progress/PaymentCircularProgress";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { Box, Card, CardBody, Flex, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import { FC, memo, useMemo, useState } from "react";
+import { FC, memo } from "react";
 
 const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
-    const { date, payments } = props;
+    const { date, totalPrice } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [totalPrice, setTotalPrice] = useState(0);
-
-    useMemo(() => {
-        let total = 0;
-        payments.map((payment) => {
-            total += Number(payment.price);
-            setTotalPrice(total);
-        })
-    }, [payments]);
     
     let progressNumberColor = "";
     if (totalPrice < 180000) {
@@ -27,10 +18,6 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
     } else {
         progressNumberColor = "red.500";
     }
-
-    const handleOpenModal = () => {
-        onOpen();
-    };
 
     return (
         <Card h="full">
@@ -55,7 +42,7 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
                         </Text>
                         <Box w="full" mt={{ base: 6, md: 16 }}>
                             <AddButton
-                                onClick={handleOpenModal}
+                                onClick={onOpen}
                                 w={{ base: "full" }}
                             >
                                 データ追加

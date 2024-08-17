@@ -9,6 +9,7 @@ export type PaymentsPageProps = {
     paymentProcessing: boolean;
     payments: Array<Payment>;
     paymentPageInfo: PaymentPageInfo | null;
+    totalPrice: number;
     paymentError: PaymentError | null;
     paymentData: PaymentData | null;
     setPaymentData: Dispatch<SetStateAction<PaymentData | null>>;

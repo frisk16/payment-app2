@@ -81,12 +81,15 @@ class PaymentController extends Controller
         $keyword = $payment_data['keyword'];
         $min_price = !empty($payment_data['minPrice']) ? $payment_data['minPrice'] : 0;
         $max_price = !empty($payment_data['maxPrice']) ? $payment_data['maxPrice'] : $base_payments->max('price');
+        $total_price = 0;
 
         if (empty($keyword) && empty($min_price) && empty($max_price)) {
             $payments = $base_payments
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
+
+            $total_price = $base_payments->sum('price');
         } else {
             $payments = $base_payments
                 ->where('name', 'LIKE', "%{$keyword}%")
@@ -95,10 +98,17 @@ class PaymentController extends Controller
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
+                
+            $total_price = $base_payments
+                ->where('name', 'LIKE', "%{$keyword}%")
+                ->where('price', '>=', $min_price)
+                ->where('price', '<=', $max_price)
+                ->sum('price');
         }
-        
+    
         return response()->json([
             'payments' => $payments,
+            'totalPrice' => $total_price,
         ]);
     }
     
