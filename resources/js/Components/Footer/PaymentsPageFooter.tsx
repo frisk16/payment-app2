@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 import { FC } from "react";
 
 const PaymentsPageFooter: FC<PaymentsPageProps> = (props) => {
-    const { paymentPageInfo, year, month, totalPrice } = props;
+    const { paymentPageInfo, year, month, totalPrice, page } = props;
 
     return (
         <footer>
@@ -14,6 +14,7 @@ const PaymentsPageFooter: FC<PaymentsPageProps> = (props) => {
                     totalPrice={totalPrice}
                     year={year}
                     month={month}
+                    page={page}
                 />
             </Box>
         </footer>

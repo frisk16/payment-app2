@@ -58,6 +58,7 @@ const CurrentPaymentsPage: FC<Props> = memo((props) => {
                 totalPrice={totalPrice}
                 paymentError={paymentError}
                 paymentData={paymentData}
+                page={page}
                 setPaymentData={setPaymentData}
                 resetError={resetError}
                 resetData={resetData}

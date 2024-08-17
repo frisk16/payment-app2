@@ -12,6 +12,7 @@ export type PaymentsPageProps = {
     totalPrice: number;
     paymentError: PaymentError | null;
     paymentData: PaymentData | null;
+    page: number;
     setPaymentData: Dispatch<SetStateAction<PaymentData | null>>;
     resetError: () => void;
     resetData: () => void;

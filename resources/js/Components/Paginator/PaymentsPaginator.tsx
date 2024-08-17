@@ -13,10 +13,11 @@ type Props = {
     year: number;
     month: number;
     totalPrice: number;
+    page: number;
 }
 
 const PaymentsPaginator: FC<Props> = memo((props) => {
-    const { paymentPageInfo, year, month, totalPrice } = props;
+    const { paymentPageInfo, year, month, totalPrice, page } = props;
 
     const keyword = route().params.keyword ? route().params.keyword : "";
     const minPrice = route().params.minPrice ? route().params.minPrice : "";
@@ -30,7 +31,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     <ActivePrevPageButton />
                 ) : (
                     <PrevPageButton
-                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${Number(route().params.page) - 1}`}
+                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${page - 1}`}
                     />
                 )}
             </Box>
@@ -53,7 +54,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     <ActiveNextPageButton />
                 ) : (
                     <NextPageButton 
-                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${Number(route().params.page) + 1}`}
+                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${page + 1}`}
                     />
                 )}
             </Box>
