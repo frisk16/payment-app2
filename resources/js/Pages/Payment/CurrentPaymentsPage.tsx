@@ -42,7 +42,7 @@ const CurrentPaymentsPage: FC<Props> = memo((props) => {
             paymentData,
             order: route().params.order,
         })
-    }, []);
+    }, [page]);
 
     return (
         <AuthenticatedLayout user={auth.user} title="今月のデータ">
