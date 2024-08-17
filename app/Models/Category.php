@@ -21,6 +21,6 @@ class Category extends Model
 
     public function payments()
     {
-        return $this->belongsToMany(Payment::class);
+        return $this->belongsToMany(Payment::class)->withTimestamps();
     }
 }

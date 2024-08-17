@@ -2,7 +2,7 @@ import useMessage from "@/Fooks/useMessage";
 import { Category } from "@/types/api/Category";
 import { Payment, PaymentData, PaymentError, PaymentPageInfo } from "@/types/api/Payment";
 import axios from "axios";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from "react";
 
 export type PaymentApiProps = {
     page?: number;
@@ -13,6 +13,8 @@ export type PaymentApiProps = {
     paymentId?: number;
     deleteIds?: Array<Number>;
     order?: string;
+    data?: Array<Number>;
+    setCurrentCategories?: Dispatch<SetStateAction<Array<Category>>>;
     resetData?: () => void;
     onClose?: () => void;
 };
@@ -33,7 +35,6 @@ const usePayment = () => {
         date: "",
     });
     const [payments, setPayments] = useState<Array<Payment>>([]);
-    const [categories, setCategories] = useState<Array<Category>>([]);
     const [paymentPageInfo, setPaymentPageInfo] = useState<PaymentPageInfo | null>(null);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
     const { getMessage } = useMessage();
@@ -227,11 +228,34 @@ const usePayment = () => {
      * 各データ毎のカテゴリー取得
      */
     const getCategoryLists = useCallback((props: PaymentApiProps) => {
-        const { paymentId = null } = props;
+        const { paymentId = null, setCurrentCategories = null } = props;
 
         axios.get(route("payments.get_categories", {id: paymentId}))
-            .then((res) => setCategories(res.data.categories))
+            .then((res) => setCurrentCategories!(res.data.categories))
             .catch((err) => console.log(err));
+    }, []);
+
+    /**
+     * 各データのカテゴリー追加、削除
+     */
+    const toggleCategory = useCallback((props: PaymentApiProps) => {
+        const { paymentId = null, data = [], setCurrentCategories = null } = props;
+
+        axios.put(route("payments.toggle_category", {id: paymentId}), {
+            data
+        })
+        .then((res) => {
+            if (res.data.error) {
+                getMessage({ title: res.data.error, status: "warning" });
+            } else {
+                getMessage({ title: "タグを更新しました", status: "success" });
+                setCurrentCategories!(res.data.currentCategories);
+            }
+        })
+        .catch((err) => {
+            getMessage({ title: "タグ更新中にエラーが発生しました", status: "error" });
+            console.log(err);
+        });
     }, []);
 
     return {
@@ -249,7 +273,7 @@ const usePayment = () => {
         editPayment,
         deletePayment,
         getCategoryLists,
-        categories
+        toggleCategory
     };
 };
 

@@ -43,6 +43,7 @@ Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->g
     Route::put('/payments/{id}/api/update', 'update')->name('payments.update');
     Route::put('/payments/api/destroy', 'destroy')->name('payments.destroy');
     Route::get('/payments/{id}/api/get_categories', 'get_categories')->name('payments.get_categories');
+    Route::put('/payments/{id}/api/toggle_category', 'toggle_category')->name('payments.toggle_category');
 });
 
 require __DIR__.'/auth.php';

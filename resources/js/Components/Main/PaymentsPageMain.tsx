@@ -1,5 +1,6 @@
 import DeletePaymentAsideMenu from "@/Components/Aside/DeletePyamentAsideMenu";
 import PaymentCategory from "@/Components/Badge/PaymentCategory";
+import NotFound from "@/Components/Default/NotFound";
 import EditPaymentModal from "@/Components/Modal/EditPaymentModal";
 import Loading from "@/Components/Progress/Loading";
 import { Payment } from "@/types/api/Payment";
@@ -34,51 +35,61 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
             )}
 
             <Box mt={{ base: "280px", md: "350px", xl: "84px" }}>
-                {payments.map((payment) => (
-                    <Card borderRadius={0} mb={3} key={payment.id}>
-                        <CardHeader p={{ base: 2, md: 4 }} fontSize="0.8em">
-                            <Flex justifyContent="space-between">
-                                <PaymentCategory paymentId={payment.id} />
-                                <Text fontWeight="bold">{payment.date}</Text>
-                            </Flex>
-                        </CardHeader>
-                        <CardBody fontSize={{ base: "0.9em", md: "1em" }} pt={2}>
-                            <Flex justifyContent="start" alignItems="center" gap={4}>
-                                <Box>
-                                    <Checkbox
-                                        value={payment.id}
-                                        onChange={onChangeDeleteIds}
-                                        isChecked={paymentData!.deleteIds.includes(payment.id) ? true : false}
-                                    >
-                                        <Text ms={2} fontSize={{ base: "0.9em", md: "1em" }}>{payment.name}</Text>
-                                    </Checkbox>
-                                </Box>
+                {payments[0] ? (
+                    payments.map((payment) => (
+                        <Card borderRadius={0} mb={2} key={payment.id}>
+
+                            <CardHeader p={{ base: 2, md: 4 }} fontSize="0.8em">
+                                <Flex justifyContent="space-between" gap={1} flexDirection={{ base: "column", md: "row" }}>
+                                    <PaymentCategory paymentId={payment.id} />
+                                    <Text ms={2} fontWeight="bold">{payment.date}</Text>
+                                </Flex>
+                            </CardHeader>
+
+                            <CardBody fontSize={{ base: "0.9em", md: "1em" }} pt={2}>
+                                <Flex justifyContent="start" alignItems="center" gap={4}>
+                                    <Box>
+                                        <Checkbox
+                                            value={payment.id}
+                                            onChange={onChangeDeleteIds}
+                                            isChecked={paymentData!.deleteIds.includes(payment.id) ? true : false}
+                                        >
+                                            <Text ms={2} fontSize={{ base: "0.9em", md: "1em" }}>{payment.name}</Text>
+                                        </Checkbox>
+                                    </Box>
+                                    <Box ms="auto">
+                                        <Text fontWeight="bold" color="red.500">
+                                            ￥ {new Intl.NumberFormat().format(Number(payment.price))} 円
+                                        </Text>
+                                    </Box>
+                                </Flex>
+                            </CardBody>
+
+                            <Divider color="gray.300" />
+
+                            <CardFooter fontSize="0.8em" p={0} alignItems="center">
+                                <Text ms={4}>支払い：不明</Text>
                                 <Box ms="auto">
-                                    <Text fontWeight="bold" color="red.500">
-                                        ￥ {new Intl.NumberFormat().format(Number(payment.price))} 円
-                                    </Text>
+                                    <Button
+                                        borderRadius={0}
+                                        leftIcon={<EditIcon />}
+                                        size={{ base: "xs", md: "sm" }}
+                                        bg="green.400"
+                                        color="white"
+                                        _hover={{ opacity: 0.8 }}
+                                        onClick={() => handleOpenModal(payment.id)}
+                                    >
+                                        編集
+                                    </Button>
                                 </Box>
-                            </Flex>
-                        </CardBody>
-                        <Divider color="gray.300" />
-                        <CardFooter fontSize="0.8em" p={0} alignItems="center">
-                            <Text ms={4}>支払い：不明</Text>
-                            <Box ms="auto">
-                                <Button
-                                    borderRadius={0}
-                                    leftIcon={<EditIcon />}
-                                    size={{ base: "xs", md: "sm" }}
-                                    bg="green.400"
-                                    color="white"
-                                    _hover={{ opacity: 0.8 }}
-                                    onClick={() => handleOpenModal(payment.id)}
-                                >
-                                    編集
-                                </Button>
-                            </Box>
-                        </CardFooter>
-                    </Card>
-                ))}
+                            </CardFooter>
+
+                        </Card>
+                    ))
+                ) : (
+                    <NotFound />
+                )}
+                
             </Box>
 
             <EditPaymentModal

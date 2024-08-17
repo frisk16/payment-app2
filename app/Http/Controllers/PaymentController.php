@@ -176,10 +176,33 @@ class PaymentController extends Controller
      */
     public function get_categories($id)
     {
+        // 
         $categories = Payment::find($id)->categories()->get();
 
         return response()->json([
             'categories' => $categories,
+        ]);
+    }
+
+    /**
+     * 各データ毎のカテゴリー追加、削除
+     */
+    public function toggle_category(Request $request, $id)
+    {
+        // 
+        if (count($request->data) > 3) {
+            return response()->json([
+                'error' => '最大3つまで登録可能',
+            ]);
+        }
+
+        $payment = Payment::find($id);
+        $payment->categories()->sync($request->data);
+
+        $current_categories = $payment->categories()->get();
+
+        return response()->json([
+            'currentCategories' => $current_categories,
         ]);
     }
 }

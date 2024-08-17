@@ -1,4 +1,5 @@
 import AddButton from "@/Components/Button/AddButton";
+import NotFound from "@/Components/Default/NotFound";
 import AddCategoryModal from "@/Components/Modal/AddCategoryModal";
 import Loading from "@/Components/Progress/Loading";
 import { CategoriesPageProps } from "@/types/page/CategoriesPage";
@@ -25,9 +26,13 @@ const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
                 </CardHeader>
                 <Divider color="gray.300" />
                 <CardBody>
-                    {categories.map((category) => (
-                        <p key={category.id}>{category.name}</p>
-                    ))}
+                    {categories[0] ? (
+                        categories.map((category) => (
+                            <p key={category.id}>{category.name}</p>
+                        ))
+                    ) : (
+                        <NotFound />
+                    )}
                 </CardBody>
             </Card>
 

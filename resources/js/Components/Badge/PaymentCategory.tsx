@@ -1,7 +1,10 @@
 import CategoryBadge from "@/Components/Badge/CategoryBadge";
+import ToggleCategoryModal from "@/Components/Modal/ToggleCategoryModal";
 import usePayment from "@/Fooks/Api/usePayment";
-import { Flex, Text } from "@chakra-ui/react";
-import { FC, memo, useEffect } from "react";
+import { Category } from "@/types/api/Category";
+import { EditIcon } from "@chakra-ui/icons";
+import { Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { FC, memo, useEffect, useState } from "react";
 
 type Props = {
     paymentId: number;
@@ -10,17 +13,35 @@ type Props = {
 const PaymentCategory: FC<Props> = memo((props) => {
     const { paymentId } = props;
 
-    const { getCategoryLists, categories } = usePayment();
+    const [currentCategories, setCurrentCategories] = useState<Array<Category>>([]);
+    const { getCategoryLists, toggleCategory } = usePayment();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-    useEffect(() => getCategoryLists({ paymentId }), []);
+    useEffect(() => getCategoryLists({ paymentId, setCurrentCategories }), []);
 
     return (
-        <Flex>
-            <Text>カテゴリー：</Text>
-            {categories.map((category) => (
-                <CategoryBadge key={category.id}>{category.name}</CategoryBadge>
-            ))}
-        </Flex>
+        <div>
+            <Flex onClick={onOpen} cursor="pointer" alignItems="center" gap={1}>
+                <EditIcon />
+                <Text fontSize="0.9em">カテゴリー：</Text>
+                {currentCategories[0] ? (
+                        currentCategories.map((category) => (
+                        <CategoryBadge key={category.id} fontSize={{ base: "0.8em", md: "1em" }}>{category.name}</CategoryBadge>
+                    ))
+                ) : (
+                    <Text>無し</Text>
+                )}
+                
+            </Flex>
+
+            <ToggleCategoryModal
+                paymentId={paymentId}
+                setCurrentCategories={setCurrentCategories}
+                toggleCategory={toggleCategory}
+                isOpen={isOpen}
+                onClose={onClose}
+            />
+        </div>
     )
 });
 
