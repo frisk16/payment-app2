@@ -3,8 +3,8 @@ import SCheckbox from "@/Components/Form/SCheckbox";
 import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { Card, CardBody, Center, Container, FormControl, FormErrorMessage, Stack } from "@chakra-ui/react";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Card, CardBody, Container, FormControl, FormErrorMessage, Stack } from "@chakra-ui/react";
+import { Head, useForm } from "@inertiajs/react";
 import { FC, memo, useEffect } from "react";
 
 type Props = {

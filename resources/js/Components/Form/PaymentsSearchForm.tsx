@@ -51,7 +51,7 @@ const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
                         <PrimaryButton
                             as="a"
                             w={{ base: "100%", md: "120px" }}
-                            href={`?year=${year}&month=${month}&keyword=${paymentData!.keyword}&maxPrice=${paymentData!.maxPrice}&minPrice=${paymentData!.minPrice}&order=${order}&page=1`}
+                            href={`?year=${year}&month=${month}&keyword=${paymentData!.keyword}&maxPrice=${paymentData!.maxPrice}&minPrice=${paymentData!.minPrice}&order=${order}`}
                         >
                             検索
                         </PrimaryButton>
@@ -67,6 +67,8 @@ const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
             <PaymentSearchModal
                 isOpen={isOpen}
                 onClose={onClose}
+                order={order}
+                setOrder={setOrder}
                 {...props}
             />
         </Card>

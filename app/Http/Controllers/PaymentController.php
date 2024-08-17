@@ -51,22 +51,44 @@ class PaymentController extends Controller
 
     public function month_1to3_page()
     {
-        return Inertia::render('Payment/Month1to3PaymentsPage');
+        // 
+        $date = new Carbon();
+        $year = $date->year;
+
+        return Inertia::render('Payment/Month1to3PaymentsPage', [
+            'year' => $year,
+        ]);
     }
 
     public function month_4to6_page()
     {
-        return Inertia::render('Payment/Month4to6PaymentsPage');
+        // 
+        $date = new Carbon();
+        $year = $date->year;
+        
+        return Inertia::render('Payment/Month4to6PaymentsPage', [
+            'year' => $year,
+        ]);
     }
 
     public function month_7to9_page()
     {
-        return Inertia::render('Payment/Month7to9PaymentsPage');
+        $date = new Carbon();
+        $year = $date->year;
+
+        return Inertia::render('Payment/Month7to9PaymentsPage', [
+            'year' => $year,
+        ]);
     }
 
     public function month_10to12_page()
     {
-        return Inertia::render('Payment/Month10to12PaymentsPage');
+        $date = new Carbon();
+        $year = $date->year;
+        
+        return Inertia::render('Payment/Month10to12PaymentsPage', [
+            'year' => $year,
+        ]);
     }
     
     /**

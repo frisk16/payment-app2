@@ -1,9 +1,6 @@
-import usePayment from "@/Fooks/Api/usePayment";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import PaymentsPageLayout from "@/Layouts/PaymentsPageLayout";
+import BasePaymentsPage from "@/Pages/Payment/BasePaymentsPage";
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 
 type Props = {
     auth: PageProps["auth"];
@@ -15,60 +12,16 @@ type Props = {
 const CurrentPaymentsPage: FC<Props> = memo((props) => {
     const { auth, today, year, month } = props;
 
-    const page = route().params.page ? Number(route().params.page) : 1;
+    const pageTitle = "今月のデータ";
     
-    const {
-        paymentProcessing,
-        payments,
-        paymentPageInfo,
-        totalPrice,
-        paymentError,
-        paymentData,
-        setPaymentData,
-        resetError,
-        resetData,
-        getCurrentPayments, 
-        addPayment,
-        editPayment,
-        deletePayment,
-        onChangeDeleteIds,
-    } = usePayment();
-
-    useEffect(() => {
-        getCurrentPayments({
-            year,
-            month,
-            page,
-            paymentData,
-            order: route().params.order,
-        })
-    }, []);
-
     return (
-        <AuthenticatedLayout user={auth.user} title="今月のデータ">
-            <Head  title="今月のデータ" />
-
-            <PaymentsPageLayout
-                date={today}
-                year={year}
-                month={month}
-                paymentProcessing={paymentProcessing}
-                payments={payments}
-                paymentPageInfo={paymentPageInfo}
-                totalPrice={totalPrice}
-                paymentError={paymentError}
-                paymentData={paymentData}
-                page={page}
-                setPaymentData={setPaymentData}
-                resetError={resetError}
-                resetData={resetData}
-                addPayment={addPayment}
-                editPayment={editPayment}
-                deletePayment={deletePayment}
-                onChangeDeleteIds={onChangeDeleteIds}
-            />
-            
-        </AuthenticatedLayout>
+        <BasePaymentsPage
+            auth={auth}
+            date={today}
+            year={year}
+            month={month}
+            pageTitle={pageTitle}
+        />
     )
 });
 

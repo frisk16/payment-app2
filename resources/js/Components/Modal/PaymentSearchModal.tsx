@@ -6,17 +6,17 @@ import SInput from "@/Components/Form/SInput";
 import SSelect from "@/Components/Form/SSelect";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
-import { FC, memo, useState } from "react";
+import { Dispatch, FC, memo, SetStateAction, useState } from "react";
 
 type Props = {
     isOpen: boolean;
     onClose: () => void;
+    order: string;
+    setOrder: Dispatch<SetStateAction<string>>;
 };
 
 const PaymentSearchModal: FC<Props & PaymentsPageProps> = memo((props) => {
-    const { isOpen, onClose, paymentData, setPaymentData, year, month } = props;
-
-    const [order, setOrder] = useState("DESC");
+    const { isOpen, onClose, paymentData, setPaymentData, year, month, order, setOrder } = props;
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} isCentered>

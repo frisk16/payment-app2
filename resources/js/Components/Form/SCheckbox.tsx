@@ -4,7 +4,7 @@ import { ChangeEvent, FC, ReactNode } from "react";
 type Props = {
     isChecked: boolean;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    value: number;
+    value?: number;
     children?: ReactNode;
     name?: string;
     size?: {};
