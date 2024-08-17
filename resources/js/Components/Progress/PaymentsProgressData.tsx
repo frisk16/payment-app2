@@ -9,11 +9,12 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
     const { date, totalPrice } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    
+
+    const total = route().params.totalPrice ? Number(route().params.totalPrice) : totalPrice;
     let progressNumberColor = "";
-    if (totalPrice < 180000) {
+    if (total < 180000) {
         progressNumberColor = "blue.500";
-    } else if (totalPrice >= 180000 && totalPrice < 240000) {
+    } else if (total >= 180000 && total < 240000) {
         progressNumberColor = "yellow.500";
     } else {
         progressNumberColor = "red.500";
@@ -30,14 +31,14 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
                 >
 
                     <Box>
-                        <PaymentCircularProgress totalPrice={totalPrice}/>
+                        <PaymentCircularProgress totalPrice={total}/>
                     </Box>
 
                     <Box>
                         <Heading size="lg" my={{ base: 0, md: 8 }}>{date}</Heading>
                         <Text>
                             <Text as="span" fontSize="1.3em" fontWeight="bold" color="blue.500">
-                                {Math.round((totalPrice / 300000) * 100)}%
+                                {Math.round((total / 300000) * 100)}%
                             </Text> / 100% 消費
                         </Text>
                         <Box w="full" mt={{ base: 6, md: 16 }}>

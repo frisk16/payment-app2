@@ -87,7 +87,7 @@ class PaymentController extends Controller
             $payments = $base_payments
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(10);
+                ->paginate(3);
             
             $total_price = $base_payments->sum('price');
         } else {
@@ -97,7 +97,7 @@ class PaymentController extends Controller
                 ->where('price', '<=', $max_price)
                 ->orderBy('date', $order)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(10);
+                ->paginate(3);
                 
             $total_price = $base_payments
                 ->where('name', 'LIKE', "%{$keyword}%")

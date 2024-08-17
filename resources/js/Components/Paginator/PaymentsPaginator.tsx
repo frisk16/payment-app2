@@ -12,14 +12,16 @@ type Props = {
     paymentPageInfo: PaymentPageInfo | null;
     year: number;
     month: number;
+    totalPrice: number;
 }
 
 const PaymentsPaginator: FC<Props> = memo((props) => {
-    const { paymentPageInfo, year, month } = props;
+    const { paymentPageInfo, year, month, totalPrice } = props;
 
     const keyword = route().params.keyword ? route().params.keyword : "";
     const minPrice = route().params.minPrice ? route().params.minPrice : "";
     const maxPrice = route().params.maxPrice ? route().params.maxPrice : "";
+    const total = route().params.totalPrice ? Number(route().params.totalPrice) : totalPrice;
 
     return (
         <Flex justifyContent="center">
@@ -28,7 +30,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     <ActivePrevPageButton />
                 ) : (
                     <PrevPageButton
-                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${Number(route().params.page) - 1}`}
+                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${Number(route().params.page) - 1}`}
                     />
                 )}
             </Box>
@@ -39,7 +41,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     ) : ( 
                         <PageLinkButton
                             key={i}
-                            href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${i + 1}`}
+                            href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${i + 1}`}
                         >
                             {i + 1}
                         </PageLinkButton>
@@ -51,7 +53,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     <ActiveNextPageButton />
                 ) : (
                     <NextPageButton 
-                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${Number(route().params.page) + 1}`}
+                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${Number(route().params.page) + 1}`}
                     />
                 )}
             </Box>
