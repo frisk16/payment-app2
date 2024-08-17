@@ -16,7 +16,7 @@ const Month10to12PaymentsPage: FC<Props> = memo((props) => {
     const month = route().params.month && route().params.month.match(/^(10|11|12)$/) ? Number(route().params.month) : 1;
     const pageTitle = `${month}月のデータ`;
     const date = `${year}年${month}月のデータ`;
-    const page = Number(route().params.page);
+    const page = route().params.page ? Number(route().params.page) : 1;
     
     const {
         paymentProcessing,

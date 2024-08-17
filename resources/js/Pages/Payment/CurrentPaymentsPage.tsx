@@ -15,7 +15,7 @@ type Props = {
 const CurrentPaymentsPage: FC<Props> = memo((props) => {
     const { auth, today, year, month } = props;
 
-    const page = Number(route().params.page);
+    const page = route().params.page ? Number(route().params.page) : 1;
     
     const {
         paymentProcessing,
