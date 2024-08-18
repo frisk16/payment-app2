@@ -73,7 +73,7 @@ const ToggleCategoryModal: FC<Props> = memo((props) => {
                     <DisableButton onClick={onClose}>閉じる</DisableButton>
                     <SuccessButton
                         onClick={handleToggleCategory}
-                        disabled={!categories[0] ?? paymentProcessing}
+                        disabled={!categories[0] || paymentProcessing}
                         loading={paymentProcessing}
                     >
                         更新
