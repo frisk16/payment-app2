@@ -17,7 +17,7 @@ const AuthenticatedAside: FC = memo(() => {
         setLogoutProcessing(true);
         axios.post(route("logout"))
         .finally(() => {
-            location.reload();
+            location.href = route("login");
         });
     };
     

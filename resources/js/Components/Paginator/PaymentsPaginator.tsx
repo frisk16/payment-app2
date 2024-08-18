@@ -22,7 +22,10 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
     const keyword = route().params.keyword ? route().params.keyword : "";
     const minPrice = route().params.minPrice ? route().params.minPrice : "";
     const maxPrice = route().params.maxPrice ? route().params.maxPrice : "";
+    const order = route().params.order ? route().params.order : "DESC";
     const total = route().params.totalPrice ? Number(route().params.totalPrice) : totalPrice;
+    
+    const href = `?year=${year}&month=${month}&keyword=${keyword}&order=${order}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}`;
 
     return (
         <Flex justifyContent="center">
@@ -31,7 +34,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     <ActivePrevPageButton />
                 ) : (
                     <PrevPageButton
-                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${page - 1}`}
+                        href={`${href}&page=${page - 1}`}
                     />
                 )}
             </Box>
@@ -42,7 +45,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     ) : ( 
                         <PageLinkButton
                             key={i}
-                            href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${i + 1}`}
+                            href={`${href}&page=${i + 1}`}
                         >
                             {i + 1}
                         </PageLinkButton>
@@ -54,7 +57,7 @@ const PaymentsPaginator: FC<Props> = memo((props) => {
                     <ActiveNextPageButton />
                 ) : (
                     <NextPageButton 
-                        href={`?year=${year}&month=${month}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&totalPrice=${total}&page=${page + 1}`}
+                        href={`${href}&page=${page + 1}`}
                     />
                 )}
             </Box>

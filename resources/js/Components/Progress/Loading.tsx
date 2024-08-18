@@ -13,11 +13,11 @@ const Loading: FC = () => {
         >
             <Spinner
                 size="xl"
-                thickness="4px"
+                thickness="5px"
                 color="blue.400"
                 emptyColor="gray.300"
             />
-            <Text>お待ちください</Text>
+            <Text mt={2} fontWeight="bold">お待ちください</Text>
         </Center>
     )
 };
