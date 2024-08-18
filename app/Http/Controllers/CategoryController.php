@@ -23,7 +23,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * カテゴリー設定ページ
      */
     public function setting_page()
     {
@@ -33,6 +33,15 @@ class CategoryController extends Controller
         return Inertia::render('Category/SettingPage', [
             'year' => $date->year,
         ]);
+    }
+
+    /**
+     * カテゴリー毎の支払い詳細ページ
+     */
+    public function show_page($id)
+    {
+        // 
+        
     }
 
     /**

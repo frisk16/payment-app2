@@ -1,9 +1,12 @@
+import CategoryBadge from "@/Components/Badge/CategoryBadge";
 import AddButton from "@/Components/Button/AddButton";
 import NotFound from "@/Components/Default/NotFound";
 import AddCategoryModal from "@/Components/Modal/AddCategoryModal";
+import CategoryProgress from "@/Components/Progress/CategoryProgress";
 import Loading from "@/Components/Progress/Loading";
 import { CategoriesPageProps } from "@/types/page/CategoriesPage";
-import { Card, CardBody, CardHeader, Divider, Flex, Heading, useDisclosure } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { Box, Card, CardBody, CardHeader, Divider, Flex, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
@@ -26,13 +29,35 @@ const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
                 </CardHeader>
                 <Divider color="gray.300" />
                 <CardBody>
-                    {categories[0] ? (
-                        categories.map((category) => (
-                            <p key={category.id}>{category.name}</p>
-                        ))
-                    ) : (
-                        <NotFound />
-                    )}
+                    <ul>
+                        {categories[0] ? (
+                            categories.map((category) => (
+                                <li key={category.id}>
+                                    <Box
+                                        w={{ base: "full", lg: "80%" }}
+                                        mx="auto"
+                                        p={2}
+                                        mb={2}
+                                    >
+                                        <Flex alignItems="end" gap={2}>
+                                            <Box as="a" href="#">
+                                                <CategoryBadge fontSize={{ base: "1.1em", md: "1.2em" }}>{category.name}</CategoryBadge>
+                                                <Text fontSize="0.8em">データ件数：15件／500件</Text>
+                                            </Box>
+                                            <Box ms="auto" color="red" cursor="pointer" onClick={() => {}}>
+                                                <DeleteIcon />
+                                            </Box>
+                                        </Flex>
+                                        <Box mt={2}>
+                                            <CategoryProgress value={15} />
+                                        </Box>
+                                    </Box>
+                                </li>
+                            ))
+                        ) : (
+                            <NotFound />
+                        )}
+                    </ul>
                 </CardBody>
             </Card>
 

@@ -39,6 +39,8 @@ Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->g
     Route::get('/payments/month_7to9', 'month_7to9_page')->name('payments.month_7to9');
     Route::get('/payments/month_10to12', 'month_10to12_page')->name('payments.month_10to12');
     Route::get('/payments/api/get', 'get_payments')->name('payments.get');
+    Route::get('/payments/categories/{id}/api/get', 'get_category_payments')->name('payments.get_categories');
+
     Route::post('/payments/api/store', 'store')->name('payments.store');
     Route::put('/payments/{id}/api/update', 'update')->name('payments.update');
     Route::put('/payments/api/destroy', 'destroy')->name('payments.destroy');

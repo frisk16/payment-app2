@@ -2,10 +2,11 @@ import AsideAccordionButton from "@/Components/Aside/AsideAccordionButton";
 import AsideAccordionItem from "@/Components/Aside/AsideAccordionItem";
 import AppIcon from "@/Components/Icon/AppIcon";
 import Loading from "@/Components/Progress/Loading";
+import useCategory from "@/Fooks/Api/useCategory";
 import { CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -17,6 +18,11 @@ const MenuDrawer: FC<Props> = memo((props) => {
     const { isOpen, onClose, accordionIndex } = props;
 
     const [logoutProcessing, setLogoutProcessing] = useState(false);
+    const { categories, getCategories } = useCategory();
+
+    useEffect(() => {
+        getCategories();
+    }, []);
 
     const logout = () => {
         setLogoutProcessing(true);
@@ -67,6 +73,9 @@ const MenuDrawer: FC<Props> = memo((props) => {
                                 leftIcon={<CalendarIcon />}
                             >
                                 <AsideAccordionButton href={route("categories.setting")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
+                                {categories.map((category) => (
+                                    <AsideAccordionButton key={category.id} href="#" title={category.name} />
+                                ))}
                             </AsideAccordionItem>
 
                             <AsideAccordionItem

@@ -1,17 +1,22 @@
-import ApplicationLogo from "@/Components/Default/ApplicationLogo";
 import AsideAccordionButton from "@/Components/Aside/AsideAccordionButton";
 import AsideAccordionItem from "@/Components/Aside/AsideAccordionItem";
 import { CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box, Heading } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import useAccordionOption from "@/Fooks/useAccordionOption";
 import Loading from "@/Components/Progress/Loading";
 import AppIcon from "@/Components/Icon/AppIcon";
+import useCategory from "@/Fooks/Api/useCategory";
 
 const AuthenticatedAside: FC = memo(() => {
-    const { accordionIndex } = useAccordionOption();
     const [logoutProcessing, setLogoutProcessing] = useState(false);
+    const { accordionIndex } = useAccordionOption();
+    const { categories, getCategories } = useCategory();
+
+    useEffect(() => {
+        getCategories();
+    }, []);
 
     const logout = () => {
         setLogoutProcessing(true);
@@ -60,6 +65,9 @@ const AuthenticatedAside: FC = memo(() => {
                             leftIcon={<CalendarIcon />}
                         >
                             <AsideAccordionButton href={route("categories.setting")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
+                            {categories.map((category) => (
+                                <AsideAccordionButton key={category.id} href="#" title={category.name} />
+                            ))}
                         </AsideAccordionItem>
 
                         <AsideAccordionItem

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
@@ -133,7 +134,27 @@ class PaymentController extends Controller
             'totalPrice' => $total_price,
         ]);
     }
+
+    /**
+     * カテゴリー毎のデータ取得
+     */
+    public function get_category_payments(Request $request, $id)
+    {
+        $base_payments = Category::find($id)->payments()->whereYear('date', $request->year)->whereMonth('date', $request->month);
+        $payments = $base_payments->orderBy('date', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
+        $total_price = $base_payments->sum('price');
     
+        return response()->json([
+            'payments' => $payments,
+            'totalPrice' => $total_price,
+        ]);
+    }
+
+    
+    /*--------------------
+     * データ操作
+     --------------------*/
+
     /**
      * Store a newly created resource in storage.
      */
