@@ -115,7 +115,7 @@ const usePayment = () => {
         const { year = 2024, month = 1, categoryId = null, page = 1 } = props;
 
         setPaymentProcessing(true);
-        axios.get(route("payments.get_categories", {id: categoryId}), {
+        axios.get(route("payments.get_category_payments", {id: categoryId}), {
             params: {
                 year,
                 month,

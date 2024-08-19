@@ -74,7 +74,7 @@ const MenuDrawer: FC<Props> = memo((props) => {
                             >
                                 <AsideAccordionButton href={route("categories.setting")} title="カテゴリー管理" rightIcon={<SettingsIcon />} />
                                 {categories.map((category) => (
-                                    <AsideAccordionButton key={category.id} href="#" title={category.name} />
+                                    <AsideAccordionButton key={category.id} href={route("categories.show", {id: category.id})} title={category.name} />
                                 ))}
                             </AsideAccordionItem>
 

@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->
     Route::get('/categories', 'setting_page')->name('categories.setting');
     Route::get('/categories/api/get', 'get_categories')->name('categories.get');
     Route::post('/categories/api/store', 'store')->name('categories.store');
+    Route::get('/categories/{id}', 'show_page')->name('categories.show');
 });
 
 Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function() {
@@ -39,7 +40,7 @@ Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->g
     Route::get('/payments/month_7to9', 'month_7to9_page')->name('payments.month_7to9');
     Route::get('/payments/month_10to12', 'month_10to12_page')->name('payments.month_10to12');
     Route::get('/payments/api/get', 'get_payments')->name('payments.get');
-    Route::get('/payments/categories/{id}/api/get', 'get_category_payments')->name('payments.get_categories');
+    Route::get('/payments/categories/{id}/api/get', 'get_category_payments')->name('payments.get_category_payments');
 
     Route::post('/payments/api/store', 'store')->name('payments.store');
     Route::put('/payments/{id}/api/update', 'update')->name('payments.update');

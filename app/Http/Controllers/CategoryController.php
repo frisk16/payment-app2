@@ -41,7 +41,18 @@ class CategoryController extends Controller
     public function show_page($id)
     {
         // 
-        
+        $category = Auth::user()->categories()->where('id', $id)->first();
+        if (! $category) {
+            return to_route("categories.setting");
+        }
+
+        $date = new Carbon();
+
+        return Inertia::render('Category/ShowPage', [
+            'category' => $category,
+            'currentYear' => $date->year,
+            'currentMonth' => $date->month,
+        ]);
     }
 
     /**

@@ -7,6 +7,7 @@ import { FC, memo, useEffect } from "react";
 
 type Props = {
     auth: PageProps["auth"];
+    categoryId: number;
     date: string;
     year: number;
     month: number;
@@ -14,7 +15,7 @@ type Props = {
 };
 
 const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
-    const { auth, date, year, month, pageTitle } = props;
+    const { auth, categoryId, date, year, month, pageTitle } = props;
 
     const page = route().params.page ? Number(route().params.page) : 1;
     
@@ -37,6 +38,7 @@ const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
 
     useEffect(() => {
         getCategoryPayments({
+            categoryId,
             year,
             month,
             page,
