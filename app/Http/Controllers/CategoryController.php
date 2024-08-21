@@ -30,8 +30,18 @@ class CategoryController extends Controller
         //
         $date = Carbon::now();
 
+        $categories = Auth::user()->categories()->get();
+        $payments_counter = [];
+        foreach ($categories as $category) {
+            $payments_counter[] = [
+                'id' => $category->id,
+                'count' => $category->payments()->count(),
+            ];
+        }
+
         return Inertia::render('Category/SettingPage', [
             'year' => $date->year,
+            'paymentsCounter' => $payments_counter,
         ]);
     }
 

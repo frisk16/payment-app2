@@ -6,7 +6,7 @@ import SInput from "@/Components/Form/SInput";
 import SSelect from "@/Components/Form/SSelect";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
-import { Dispatch, FC, memo, SetStateAction, useState } from "react";
+import { Dispatch, FC, memo, SetStateAction } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const PaymentSearchModal: FC<Props & PaymentsPageProps> = memo((props) => {
-    const { isOpen, onClose, paymentData, setPaymentData, year, month, order, setOrder } = props;
+    const { isOpen, onClose, paymentData = null, setPaymentData, year, month, order, setOrder } = props;
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} isCentered>
@@ -45,7 +45,7 @@ const PaymentSearchModal: FC<Props & PaymentsPageProps> = memo((props) => {
                             
                             <FormControl>
                                 <SFormLabel>日付</SFormLabel>
-                                <SSelect onChange={(e) => setOrder(e.target.value)}>
+                                <SSelect onChange={(e) => setOrder(e.target.value)} defaultValue={order}>
                                     <option value="DESC">新しい順</option>
                                     <option value="ASC">古い順</option>
                                 </SSelect>

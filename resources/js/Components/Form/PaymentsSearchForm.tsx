@@ -11,7 +11,7 @@ import { FC, memo, useState } from "react";
 const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
     const { year, month, paymentData, setPaymentData } = props;
 
-    const [order, setOrder] = useState("DESC");
+    const [order, setOrder] = useState(route().params.order ?? "DESC");
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
@@ -34,7 +34,7 @@ const PaymentsSearchForm: FC<PaymentsPageProps> = memo((props) => {
                             
                             <FormControl>
                                 <SFormLabel>日付</SFormLabel>
-                                <SSelect onChange={(e) => setOrder(e.target.value)}>
+                                <SSelect onChange={(e) => setOrder(e.target.value)} defaultValue={order}>
                                     <option value="DESC">新しい順</option>
                                     <option value="ASC">古い順</option>
                                 </SSelect>

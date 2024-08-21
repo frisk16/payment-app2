@@ -8,6 +8,7 @@ export type CategoriesPageProps = {
     categoryData: CategoryData | null;
     categoryError: CategoryError | null;
     categories: Array<Category>;
+    paymentsCounter: Array<{ id: number, count: number }>;
     resetData: () => void;
     resetError: () => void;
     setCategoryData: Dispatch<SetStateAction<CategoryData | null>>;

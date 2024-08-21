@@ -6,7 +6,7 @@ import SCheckbox from "@/Components/Form/SCheckbox";
 import useCategory from "@/Fooks/Api/useCategory";
 import { PaymentApiProps } from "@/Fooks/Api/usePayment";
 import { Category } from "@/types/api/Category";
-import { Box, Center, Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
 import { ChangeEvent, Dispatch, FC, memo, SetStateAction, useEffect, useState } from "react";
 
 type Props = {

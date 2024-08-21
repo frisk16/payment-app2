@@ -17,7 +17,7 @@ const SInput: FC<Props> = (props) => {
 
     return <Input
                 type={type}
-                value={value}
+                defaultValue={value}
                 onChange={onChange}
                 name={name}
                 min={min}

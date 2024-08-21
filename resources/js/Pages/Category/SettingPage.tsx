@@ -8,10 +8,11 @@ import { FC, useEffect } from "react";
 type Props = {
     auth: PageProps['auth'];
     year: number;
+    paymentsCounter: Array<{ id: number, count: number }>;
 };
 
 const SettingPage: FC<Props> = (props) => {
-    const { auth, year } = props;
+    const { auth, year, paymentsCounter } = props;
 
     const {
         categoryProcessing,
@@ -37,6 +38,7 @@ const SettingPage: FC<Props> = (props) => {
                 categoryData={categoryData}
                 categoryError={categoryError}
                 categories={categories}
+                paymentsCounter={paymentsCounter}
                 resetData={resetData}
                 resetError={resetError}
                 setCategoryData={setCategoryData}
