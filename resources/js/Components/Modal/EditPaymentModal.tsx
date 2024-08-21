@@ -15,8 +15,7 @@ type Props = {
 
 const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
     const { targetPayment, isOpen, onClose, paymentProcessing, payments, paymentError, paymentData, setPaymentData, resetError, editPayment, year, month } = props;
-    
-    useEffect(() => resetError(),[isOpen]);
+    console.log(paymentData);
 
     useEffect(() => {
         setPaymentData({
@@ -25,7 +24,9 @@ const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
             price: targetPayment?.price ?? "",
             date: targetPayment?.date ?? "",
         });     
-    }, [targetPayment]);    
+    }, [isOpen]);
+
+    useEffect(() => resetError(),[isOpen]);
     
     const handleEditPayment = () => {
         editPayment({ payments, paymentData, paymentId: targetPayment!.id, year, month });

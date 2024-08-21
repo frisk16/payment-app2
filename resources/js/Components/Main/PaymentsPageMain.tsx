@@ -17,6 +17,7 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
 
     const handleOpenModal = (paymentId: number) => {
         setTargetPayment(payments.find((payment) => payment.id === paymentId) ?? null);
+        resetData();
         onOpen();
     };
     
