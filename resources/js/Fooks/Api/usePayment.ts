@@ -144,8 +144,7 @@ const usePayment = () => {
      * データ追加
      */
     const addPayment = useCallback((props: PaymentApiProps) => {
-        const { payments, paymentData = null, year = 2024, month = 1, resetData = null } = props;        
-
+        const { payments, paymentData = null, year = 2024, month = 1, resetData = null } = props;
         setPaymentProcessing(true);
         axios.post(route("payments.store"), {
             paymentData,

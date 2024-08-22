@@ -25,8 +25,6 @@ const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
             date: targetPayment?.date ?? "",
         });     
     }, [isOpen]);
-
-    useEffect(() => resetError(),[isOpen]);
     
     const handleEditPayment = () => {
         editPayment({ payments, paymentData, paymentId: targetPayment!.id, year, month });

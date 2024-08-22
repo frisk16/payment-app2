@@ -6,7 +6,7 @@ import { Box, Card, CardBody, Flex, Heading, Text, useDisclosure } from "@chakra
 import { FC, memo } from "react";
 
 const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
-    const { date, totalPrice } = props;
+    const { date, totalPrice, resetData, resetError } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -18,6 +18,12 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
         progressNumberColor = "yellow.500";
     } else {
         progressNumberColor = "red.500";
+    }
+
+    const handleOpenModal = () => {
+        resetData();
+        resetError();
+        onOpen();
     }
 
     return (
@@ -43,7 +49,7 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
                         </Text>
                         <Box w="full" mt={{ base: 6, md: 16 }}>
                             <AddButton
-                                onClick={onOpen}
+                                onClick={handleOpenModal}
                                 w={{ base: "full" }}
                             >
                                 データ追加

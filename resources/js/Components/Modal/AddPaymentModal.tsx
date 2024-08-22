@@ -4,7 +4,7 @@ import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { FormControl, FormErrorMessage, Heading, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -12,12 +12,7 @@ type Props = {
 };
 
 const AddPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
-    const { isOpen, onClose, paymentProcessing, payments, paymentError, paymentData, setPaymentData, resetData, resetError, addPayment, year, month } = props;
-
-    useEffect(() => {
-        resetData();
-        resetError();
-    }, [isOpen, payments]);        
+    const { isOpen, onClose, resetData, paymentProcessing, payments, paymentError, paymentData, setPaymentData, addPayment, year, month } = props;
     
     const handleAddPayment = () => {
         addPayment({ payments, paymentData, year, month, resetData });

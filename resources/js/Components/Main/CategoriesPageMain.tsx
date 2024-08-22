@@ -8,9 +8,15 @@ import { Card, CardBody, CardHeader, Divider, Flex, Heading, useDisclosure } fro
 import { FC, memo } from "react";
 
 const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
-    const { year, categories, categoryProcessing, paymentsCounter } = props;
+    const { year, categories, categoryProcessing, paymentsCounter, resetData, resetError } = props;
 
-    const { isOpen, onOpen, onClose } = useDisclosure();    
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    
+    const handleOpenModal = () => {
+        resetData();
+        resetError();
+        onOpen();
+    }
 
     return (
         <header>
@@ -22,7 +28,7 @@ const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
                 <CardHeader>
                     <Flex justifyContent="space-between" alignItems="center">
                         <Heading size="sm">{year}年総計</Heading>
-                        <AddButton onClick={onOpen}>追加</AddButton>
+                        <AddButton onClick={handleOpenModal}>追加</AddButton>
                     </Flex>
                 </CardHeader>
                 <Divider color="gray.300" />

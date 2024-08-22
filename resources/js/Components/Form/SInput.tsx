@@ -3,8 +3,8 @@ import { ChangeEvent, FC } from "react";
 
 type Props = {
     type: "text" | "password" | "email" | "date" | "datetime-local" | "number" | "tel" | "search" | "file" | "hidden";
-    value: string | number;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    value: string | number;
     name?: string;
     min?: number;
     placeholder?: string;
@@ -13,11 +13,11 @@ type Props = {
 };
 
 const SInput: FC<Props> = (props) => {
-    const { type, value, onChange, name = "", min = 0, placeholder = "", borderRadius = undefined, size = { base: "sm", md: "md" } } = props;
+    const { type, value = undefined, onChange, name = "", min = 0, placeholder = "", borderRadius = undefined, size = { base: "sm", md: "md" } } = props;
 
     return <Input
                 type={type}
-                defaultValue={value}
+                value={value}
                 onChange={onChange}
                 name={name}
                 min={min}

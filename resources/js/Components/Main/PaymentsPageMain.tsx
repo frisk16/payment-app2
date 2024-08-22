@@ -10,7 +10,7 @@ import { Box, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Divider,
 import { FC, memo, useState } from "react";
 
 const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
-    const { payments, paymentProcessing, paymentData, resetData, onChangeDeleteIds } = props;
+    const { payments, paymentProcessing, paymentData, resetData, resetError, onChangeDeleteIds } = props;
     
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [targetPayment, setTargetPayment] = useState<Payment | null>(null);
@@ -18,6 +18,7 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
     const handleOpenModal = (paymentId: number) => {
         setTargetPayment(payments.find((payment) => payment.id === paymentId) ?? null);
         resetData();
+        resetError();
         onOpen();
     };
     

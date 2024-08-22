@@ -4,7 +4,7 @@ import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import { CategoriesPageProps } from "@/types/page/CategoriesPage";
 import { FormControl, FormErrorMessage, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 
 type Props = {
     isOpen: boolean;
@@ -20,18 +20,12 @@ const AddCategoryModal: FC<Props & CategoriesPageProps> = memo((props) => {
         categoryData,
         categoryProcessing,
         setCategoryData,
-        resetData,
-        resetError,
-        addCategory
+        addCategory,
     } = props;
 
-    useEffect(() => {
-        resetData();
-        resetError();
-    }, [isOpen, categories]);        
     
     const handleAddCategory = () => {
-        addCategory({ categories, categoryData });
+        addCategory({ categoryData });
     };    
 
     return (
