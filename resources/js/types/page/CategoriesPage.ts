@@ -13,4 +13,5 @@ export type CategoriesPageProps = {
     resetError: () => void;
     setCategoryData: Dispatch<SetStateAction<CategoryData | null>>;
     addCategory: (props: CategoryApiProps) => void;
+    deleteCategory: (props: CategoryApiProps) => void;
 };

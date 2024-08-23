@@ -1,6 +1,6 @@
 import usePayment from "@/Fooks/Api/usePayment";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import PaymentsPageLayout from "@/Layouts/PaymentsPageLayout";
+import CategoriesPageLayout from "@/Layouts/CategoriesPageLayout";
 import { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import { FC, memo, useEffect } from "react";
@@ -50,7 +50,7 @@ const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
 
             <Head title={pageTitle} />
 
-            <PaymentsPageLayout
+            <CategoriesPageLayout
                 date={date}
                 year={year}
                 month={month}

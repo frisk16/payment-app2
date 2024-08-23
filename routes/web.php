@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->
     Route::get('/categories/api/get', 'get_categories')->name('categories.get');
     Route::post('/categories/api/store', 'store')->name('categories.store');
     Route::get('/categories/{id}', 'show_page')->name('categories.show');
+    Route::put('/categories/{id}/destroy', 'destroy')->name('categories.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function() {

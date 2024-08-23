@@ -40,7 +40,7 @@ const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
                                 <CategoryPageProgress
                                     key={category.id}
                                     category={category}
-                                    paymentsCounter={paymentsCounter}
+                                    {...props}
                                 />
                                 
                             ))

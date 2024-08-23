@@ -86,6 +86,13 @@ class CategoryController extends Controller
         //
         $data = $request->categoryData;
         $validator = $this->validator($data);
+
+        if (Auth::user()->categories()->where('name', $data['name'])->first()) {
+            return response()->json([
+                'errors' => ['name' => '既に存在します'],
+            ]);
+        }
+
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors(),
@@ -103,22 +110,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Category $category)
@@ -129,8 +120,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
         //
+        $category = Category::find($id);
+        $name = $category->name;
+        $category->delete();
+        
+        return response()->json([
+            'name' => $name,
+        ]);
     }
 }

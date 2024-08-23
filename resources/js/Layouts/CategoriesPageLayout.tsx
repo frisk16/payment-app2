@@ -1,11 +1,21 @@
-import CategoriesPageMain from "@/Components/Main/CategoriesPageMain";
-import { CategoriesPageProps } from "@/types/page/CategoriesPage";
+import PaymentsPageFooter from "@/Components/Footer/PaymentsPageFooter";
+import CategoriesPageHeader from "@/Components/Header/CategoriesPageHeader";
+import PaymentsPageMain from "@/Components/Main/PaymentsPageMain";
+import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { FC } from "react";
 
-const CategoriesPageLayout: FC<CategoriesPageProps> = (props) => {
+const CategoriesPageLayout: FC<PaymentsPageProps> = (props) => {
     return (
         <>
-            <CategoriesPageMain
+            <CategoriesPageHeader
+                {...props}
+            />
+
+            <PaymentsPageMain
+                {...props}
+            />
+
+            <PaymentsPageFooter
                 {...props}
             />
         </>

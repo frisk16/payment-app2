@@ -4,6 +4,7 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 
 export type CategoryApiProps = {
+    id?: number;
     categories?: Array<Category>;
     categoryData?: CategoryData | null;
 };
@@ -62,7 +63,7 @@ const useCategory = () => {
                 getMessage({ title: "カテゴリー追加中...", status: "success" });
                 setTimeout(() => {
                     location.reload();
-                }, 1500);
+                }, 1000);
             }
         })
         .catch((err) => {
@@ -70,6 +71,23 @@ const useCategory = () => {
             console.log(err);
             setCategoryProcessing(false);
         });
+    }, []);
+
+    const deleteCategory = useCallback((props: CategoryApiProps) => {
+        const { id = null, categories = null } = props;
+
+        setCategoryProcessing(true);
+        axios.put(route("categories.destroy", {id}))
+            .then((res) => {
+                getMessage({ title: `「${res.data.name}」を削除しました`, status: "success" });
+                const newCategories = categories!.filter((data) => data.id !== id);
+                setCategories(newCategories);
+            })
+            .catch((err) => {
+                getMessage({ title: "削除中にエラー発生", status: "error" });
+                console.log(err);
+            })
+            .finally(() => setCategoryProcessing(false));
     }, []);
 
     return {
@@ -82,6 +100,7 @@ const useCategory = () => {
         setCategoryData,
         getCategories,
         addCategory,
+        deleteCategory
     };
 };
 

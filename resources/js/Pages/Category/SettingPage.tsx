@@ -1,6 +1,6 @@
+import CategoriesPageMain from "@/Components/Main/CategoriesPageMain";
 import useCategory from "@/Fooks/Api/useCategory";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import CategoriesPageLayout from "@/Layouts/CategoriesPageLayout";
 import { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import { FC, useEffect } from "react";
@@ -24,6 +24,7 @@ const SettingPage: FC<Props> = (props) => {
         setCategoryData,
         getCategories,
         addCategory,
+        deleteCategory
     } = useCategory();
 
     useEffect(() => getCategories(), []);
@@ -32,7 +33,7 @@ const SettingPage: FC<Props> = (props) => {
         <AuthenticatedLayout user={auth.user} title="カテゴリー設定">
             <Head title="カテゴリー設定" />
 
-            <CategoriesPageLayout
+            <CategoriesPageMain
                 year={year}
                 categoryProcessing={categoryProcessing}
                 categoryData={categoryData}
@@ -43,6 +44,7 @@ const SettingPage: FC<Props> = (props) => {
                 resetError={resetError}
                 setCategoryData={setCategoryData}
                 addCategory={addCategory}
+                deleteCategory={deleteCategory}
             />
             
         </AuthenticatedLayout>
