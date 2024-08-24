@@ -1,26 +1,21 @@
 import AddButton from "@/Components/Button/AddButton";
 import AddPaymentModal from "@/Components/Modal/AddPaymentModal";
 import PaymentCircularProgress from "@/Components/Progress/PaymentCircularProgress";
+import useProgressColor from "@/Fooks/useProgressColor";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { Box, Card, CardBody, Flex, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import { FC, memo, useMemo, useState } from "react";
+import { FC, memo, useEffect } from "react";
 
 const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
     const { date, totalPrice, resetData, resetError } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const { progressNumberColor, setProgressColor } = useProgressColor();
     const total = route().params.totalPrice ? Number(route().params.totalPrice) : totalPrice;
-    const [progressNumberColor, setProgressNumberColor] = useState("");
-    useMemo(() => {
-        if (total < 180000) {
-            setProgressNumberColor("blue.500");
-        } else if (total >= 180000 && total < 240000) {
-            setProgressNumberColor("yellow.500");
-        } else {
-            setProgressNumberColor("red.500");
-        }
-    }, []);
+
+    useEffect(() => {
+        setProgressColor({ total });
+    }, [total]);
 
     const handleOpenModal = () => {
         resetData();

@@ -43,7 +43,7 @@ const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
             month,
             page,
         })
-    }, []);
+    }, [paymentProcessing]);
 
     return (
         <AuthenticatedLayout user={auth.user} title={pageTitle} >

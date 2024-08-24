@@ -63,7 +63,7 @@ const useCategory = () => {
                 getMessage({ title: "カテゴリー追加中...", status: "success" });
                 setTimeout(() => {
                     location.reload();
-                }, 1000);
+                }, 500);
             }
         })
         .catch((err) => {
