@@ -177,12 +177,8 @@ class PaymentController extends Controller
             'date' => $data['date'],
         ]);
         
-        $targetDate = substr($data['date'], 0, 7);
-        $total_price = Auth::user()->payments()->where('date', 'LIKE', "{$targetDate}%")->sum('price');
-
         return response()->json([
             'payment' => $payment,
-            'totalPrice' => $total_price,
         ]);
     }
 
@@ -208,12 +204,8 @@ class PaymentController extends Controller
         $payment->date = $data['date'];
         $payment->update();
 
-        $targetDate = substr($data['date'], 0, 7);
-        $total_price = Auth::user()->payments()->where('date', 'LIKE', "{$targetDate}%")->sum('price');
-
         return response()->json([
             'payment' => $data,
-            'totalPrice' => $total_price,
         ]);
     }
 
@@ -227,15 +219,8 @@ class PaymentController extends Controller
             Payment::find($id)->delete();
         }
 
-        $total_price = Auth::user()
-            ->payments()
-            ->whereYear('date', $request->year)
-            ->whereMonth('date', $request->month)
-            ->sum('price');
-
         return response()->json([
             'count' => count($request->deleteIds),
-            'totalPrice' => $total_price,
         ]);
     }
 

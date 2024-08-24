@@ -36,6 +36,7 @@ const usePayment = () => {
         date: "",
     });
     const [payments, setPayments] = useState<Array<Payment>>([]);
+    const [updateCount, setUpdateCount] = useState(0);
     const [paymentPageInfo, setPaymentPageInfo] = useState<PaymentPageInfo | null>(null);
     const [totalPrice, setTotalPrice] = useState(0);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -144,7 +145,7 @@ const usePayment = () => {
      * データ追加
      */
     const addPayment = useCallback((props: PaymentApiProps) => {
-        const { payments, paymentData = null, year = 2024, month = 1, resetData = null } = props;
+        const { payments, paymentData = null, year = null, month = null, resetData = null } = props;
         setPaymentProcessing(true);
         axios.post(route("payments.store"), {
             paymentData,
@@ -165,10 +166,7 @@ const usePayment = () => {
                     const date = new Date(paymentData!.date);
                     if (year === Number(date.getFullYear()) && month === Number(date.getMonth() + 1)) {
                         setPayments([res.data.payment, ...payments!]);
-
-                        if (location.pathname.indexOf("/payments") !== -1) {
-                            setTotalPrice(res.data.totalPrice);
-                        }
+                        setUpdateCount((cnt) => cnt + 1);
                     }
                     resetData!();
                     resetError();
@@ -185,7 +183,7 @@ const usePayment = () => {
      * データ編集
      */
     const editPayment = useCallback((props: PaymentApiProps) => {
-        const { payments, paymentData = null, paymentId = null, year = 2024, month = 1 } = props;
+        const { payments, paymentData = null, paymentId = null, year = null, month = null } = props;
         
         setPaymentProcessing(true);
         axios.put(route("payments.update", {id: paymentId}), {
@@ -214,10 +212,7 @@ const usePayment = () => {
                             }
                         });
                         setPayments(payments!);
-
-                        if (location.pathname.indexOf("/payments") !== -1) {
-                            setTotalPrice(res.data.totalPrice);
-                        }
+                        setUpdateCount((cnt) => cnt + 1);
                     } else {
                         let newPayments = null;
                         newPayments = payments!.filter((payment) => payment.id !== paymentId);
@@ -237,13 +232,11 @@ const usePayment = () => {
      * データ削除
      */
     const deletePayment = useCallback((props: PaymentApiProps) => {
-        const { payments, deleteIds = [], year = null, month = null, onClose = null, resetData = null } = props;
+        const { payments, deleteIds = [], onClose = null, resetData = null } = props;
 
         setPaymentProcessing(true);
         axios.put(route("payments.destroy"), {
             deleteIds,
-            year,
-            month,
         })
         .then((res) => {
             getMessage({ title: `${res.data.count}件削除しました`, status: "success" });
@@ -252,10 +245,8 @@ const usePayment = () => {
                 newPayments = newPayments!.filter((payment) => payment.id !== id);
             });            
             setPayments(newPayments!);
+            setUpdateCount((cnt) => cnt + 1);
 
-            if (location.pathname.indexOf("/payments") !== -1) {
-                setTotalPrice(res.data.totalPrice);
-            }
             resetData!();
             onClose!();
         })
@@ -319,7 +310,8 @@ const usePayment = () => {
         editPayment,
         deletePayment,
         getCategoryLists,
-        toggleCategory
+        toggleCategory,
+        updateCount
     };
 };
 

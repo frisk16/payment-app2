@@ -1,16 +1,13 @@
-import AddButton from "@/Components/Button/AddButton";
 import SSelect from "@/Components/Form/SSelect";
-import AddPaymentModal from "@/Components/Modal/AddPaymentModal";
 import PaymentCircularProgress from "@/Components/Progress/PaymentCircularProgress";
 import useProgressColor from "@/Fooks/useProgressColor";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
-import { Box, Card, CardBody, Flex, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Card, CardBody, Flex, Heading, Text } from "@chakra-ui/react";
 import { ChangeEvent, FC, memo, useEffect } from "react";
 
 const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
-    const { date, month, totalPrice, resetData, resetError } = props;
+    const { date, month, totalPrice } = props;
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const { progressNumberColor, setProgressColor } = useProgressColor();
     const currentMonth = route().params.month ? route().params.month : String(month);
     const total = route().params.totalPrice ? Number(route().params.totalPrice) : totalPrice;
@@ -21,12 +18,6 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
 
     const onChangeSelectMonth = (e: ChangeEvent<HTMLSelectElement>) => {
         location.href = `?month=${e.target.value}`
-    }
-
-    const handleOpenModal = () => {
-        resetData();
-        resetError();
-        onOpen();
     }
 
     return (
@@ -53,35 +44,19 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
                             </Text> / 100% 消費
                         </Text>
                         <Box w="full" mt={{ base: 6, md: 16 }}>
-                            <AddButton
-                                onClick={handleOpenModal}
-                                w={{ base: "full" }}
+                            <SSelect
+                                defaultValue={currentMonth}
+                                onChange={onChangeSelectMonth}
+                                border="2px solid teal"
                             >
-                                データ追加
-                            </AddButton>
+                                {[...Array(12)].map((data, i) => (
+                                    <option key={i} value={i + 1}>{`${i + 1}月のデータを表示`}</option>
+                                ))}
+                            </SSelect>
                         </Box>
                     </Box> 
                 </Flex>
-
-                <Box mt={8} w={{ base: "full", md: "480px", lg: "560px", xl: "640px" }} mx="auto" >
-                    <SSelect
-                        defaultValue={currentMonth}
-                        onChange={onChangeSelectMonth}
-                        size={{ base: "md", lg: "lg" }}
-                        border="2px solid teal"
-                    >
-                        {[...Array(12)].map((data, i) => (
-                            <option key={i} value={i + 1}>{`${i + 1}月のデータを表示`}</option>
-                        ))}
-                    </SSelect>
-                </Box>
             </CardBody>
-
-            <AddPaymentModal
-                {...props}
-                isOpen={isOpen}
-                onClose={onClose}
-            />
         </Card>
     )
 });

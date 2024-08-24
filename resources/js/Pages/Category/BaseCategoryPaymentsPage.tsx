@@ -26,6 +26,7 @@ const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
         totalPrice,
         paymentError,
         paymentData,
+        updateCount,
         setPaymentData,
         resetError,
         resetData,
@@ -43,7 +44,7 @@ const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
             month,
             page,
         });
-    }, []);
+    }, [updateCount]);
 
     return (
         <AuthenticatedLayout user={auth.user} title={pageTitle} >

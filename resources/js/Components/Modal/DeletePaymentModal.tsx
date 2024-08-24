@@ -12,10 +12,10 @@ type Props = {
 };
 
 const DeletePaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
-    const { isOpen, onClose, deletePayment, payments, deleteIds, year, month, resetData } = props;
+    const { isOpen, onClose, deletePayment, payments, deleteIds, resetData } = props;
 
     const handleDeletePayment = () => {
-        deletePayment({ payments, deleteIds, year, month, onClose, resetData });
+        deletePayment({ payments, deleteIds, onClose, resetData });
     };
 
     return (

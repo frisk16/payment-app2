@@ -25,6 +25,7 @@ const BasePaymentsPage: FC<Props> = memo((props) => {
         totalPrice,
         paymentError,
         paymentData,
+        updateCount,
         setPaymentData,
         resetError,
         resetData,
@@ -43,7 +44,7 @@ const BasePaymentsPage: FC<Props> = memo((props) => {
             paymentData,
             order: route().params.order,
         });
-    }, []);
+    }, [updateCount]);
 
     return (
         <AuthenticatedLayout user={auth.user} title={pageTitle} >
