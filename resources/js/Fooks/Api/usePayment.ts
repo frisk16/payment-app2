@@ -165,6 +165,10 @@ const usePayment = () => {
                     const date = new Date(paymentData!.date);
                     if (year === Number(date.getFullYear()) && month === Number(date.getMonth() + 1)) {
                         setPayments([res.data.payment, ...payments!]);
+
+                        if (location.pathname.indexOf("/payments") !== -1) {
+                            setTotalPrice(res.data.totalPrice);
+                        }
                     }
                     resetData!();
                     resetError();
@@ -210,6 +214,10 @@ const usePayment = () => {
                             }
                         });
                         setPayments(payments!);
+
+                        if (location.pathname.indexOf("/payments") !== -1) {
+                            setTotalPrice(res.data.totalPrice);
+                        }
                     } else {
                         let newPayments = null;
                         newPayments = payments!.filter((payment) => payment.id !== paymentId);
@@ -229,11 +237,13 @@ const usePayment = () => {
      * データ削除
      */
     const deletePayment = useCallback((props: PaymentApiProps) => {
-        const { payments, deleteIds = [], onClose = null, resetData = null } = props;
+        const { payments, deleteIds = [], year = null, month = null, onClose = null, resetData = null } = props;
 
         setPaymentProcessing(true);
         axios.put(route("payments.destroy"), {
             deleteIds,
+            year,
+            month,
         })
         .then((res) => {
             getMessage({ title: `${res.data.count}件削除しました`, status: "success" });
@@ -242,6 +252,10 @@ const usePayment = () => {
                 newPayments = newPayments!.filter((payment) => payment.id !== id);
             });            
             setPayments(newPayments!);
+
+            if (location.pathname.indexOf("/payments") !== -1) {
+                setTotalPrice(res.data.totalPrice);
+            }
             resetData!();
             onClose!();
         })
