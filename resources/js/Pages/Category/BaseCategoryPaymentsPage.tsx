@@ -42,7 +42,7 @@ const BaseCategoryPaymentsPage: FC<Props> = memo((props) => {
             year,
             month,
             page,
-        })
+        });
     }, [paymentProcessing]);
 
     return (

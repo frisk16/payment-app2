@@ -42,7 +42,7 @@ const BasePaymentsPage: FC<Props> = memo((props) => {
             page,
             paymentData,
             order: route().params.order,
-        })
+        });
     }, [paymentProcessing]);
 
     return (
