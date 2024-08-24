@@ -15,7 +15,6 @@ type Props = {
 
 const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
     const { targetPayment, isOpen, onClose, paymentProcessing, payments, paymentError, paymentData, setPaymentData, resetError, editPayment, year, month } = props;
-    console.log(paymentData);
 
     useEffect(() => {
         setPaymentData({

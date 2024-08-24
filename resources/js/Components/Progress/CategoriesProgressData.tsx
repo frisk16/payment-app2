@@ -1,14 +1,16 @@
 import AddButton from "@/Components/Button/AddButton";
+import SSelect from "@/Components/Form/SSelect";
 import AddPaymentModal from "@/Components/Modal/AddPaymentModal";
 import PaymentCircularProgress from "@/Components/Progress/PaymentCircularProgress";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { Box, Card, CardBody, Flex, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import { FC, memo, useMemo, useState } from "react";
+import { ChangeEvent, FC, memo, useMemo, useState } from "react";
 
 const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
-    const { date, totalPrice, resetData, resetError } = props;
+    const { date, month, totalPrice, resetData, resetError } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const currentMonth = route().params.month ? route().params.month : String(month);
 
     const total = route().params.totalPrice ? Number(route().params.totalPrice) : totalPrice;
     const [progressNumberColor, setProgressNumberColor] = useState("");
@@ -21,6 +23,10 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
             setProgressNumberColor("red.500");
         }
     }, []);
+
+    const onChangeSelectMonth = (e: ChangeEvent<HTMLSelectElement>) => {
+        location.href = `?month=${e.target.value}`
+    }
 
     const handleOpenModal = () => {
         resetData();
@@ -63,6 +69,18 @@ const PaymentsProgressData: FC<PaymentsPageProps> = memo((props) => {
                     </Box>
                     
                 </Flex>
+                <Box mt={8} px={{ base: 0, md: 24, xl: 64 }} >
+                    <SSelect
+                        defaultValue={currentMonth}
+                        onChange={onChangeSelectMonth}
+                        size={{ base: "md", lg: "lg" }}
+                        border="2px solid teal"
+                    >
+                        {[...Array(12)].map((data, i) => (
+                            <option key={i} value={i + 1}>{`${i + 1}月のデータを表示`}</option>
+                        ))}
+                    </SSelect>
+                </Box>
             </CardBody>
 
             <AddPaymentModal

@@ -10,7 +10,7 @@ type Props = {
     category: Category | null;
 }
 
-const CategoryPageProgress: FC<Props & CategoriesPageProps> = (props) => {
+const CategorySettingProgress: FC<Props & CategoriesPageProps> = (props) => {
     const { category, paymentsCounter, categories, categoryProcessing, deleteCategory } = props;
 
     const [count, setCount] = useState(0);
@@ -64,4 +64,4 @@ const CategoryPageProgress: FC<Props & CategoriesPageProps> = (props) => {
         )
 }
 
-export default CategoryPageProgress;
+export default CategorySettingProgress;

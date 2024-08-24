@@ -1,14 +1,14 @@
 import AddButton from "@/Components/Button/AddButton";
 import NotFound from "@/Components/Default/NotFound";
 import AddCategoryModal from "@/Components/Modal/AddCategoryModal";
-import CategoryPageProgress from "@/Components/Progress/CategoryPageProgress";
+import CategorySettingProgress from "@/Components/Progress/CategorySettingProgress";
 import Loading from "@/Components/Progress/Loading";
 import { CategoriesPageProps } from "@/types/page/CategoriesPage";
 import { Card, CardBody, CardHeader, Divider, Flex, Heading, useDisclosure } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
-const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
-    const { year, categories, categoryProcessing, paymentsCounter, resetData, resetError } = props;
+const CategorySettingPageMain: FC<CategoriesPageProps> = memo((props) => {
+    const { year, categories, categoryProcessing, resetData, resetError } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     
@@ -37,7 +37,7 @@ const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
                         {categories[0] ? (
                             categories.map((category) => (
 
-                                <CategoryPageProgress
+                                <CategorySettingProgress
                                     key={category.id}
                                     category={category}
                                     {...props}
@@ -60,4 +60,4 @@ const CategoriesPageMain: FC<CategoriesPageProps> = memo((props) => {
     )
 });
 
-export default CategoriesPageMain;
+export default CategorySettingPageMain;

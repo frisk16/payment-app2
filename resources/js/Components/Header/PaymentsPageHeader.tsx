@@ -12,6 +12,7 @@ const PaymentsPageHeader: FC<PaymentsPageProps> = (props) => {
                 templateColumns="repeat(2, 1fr)"
                 h={240}
                 gap={4}
+                mb={{ base: "280px", md: "340px", xl: "64px" }}
             >
                 
                 <GridItem colSpan={{ base: 2, xl: 1 }}>

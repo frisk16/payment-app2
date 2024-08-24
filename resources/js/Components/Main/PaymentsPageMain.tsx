@@ -36,7 +36,7 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
                 />
             )}
 
-            <Box mt={{ base: "280px", md: "350px", xl: "84px" }}>
+            <Box>
                 {payments[0] ? (
                     payments.map((payment) => (
                         <Card borderRadius={0} mb={2} key={payment.id}>

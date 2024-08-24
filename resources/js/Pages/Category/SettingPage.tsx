@@ -1,4 +1,4 @@
-import CategoriesPageMain from "@/Components/Main/CategoriesPageMain";
+import CategorySettingPageMain from "@/Components/Main/CategorySettingPageMain";
 import useCategory from "@/Fooks/Api/useCategory";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
@@ -33,7 +33,7 @@ const SettingPage: FC<Props> = (props) => {
         <AuthenticatedLayout user={auth.user} title="カテゴリー設定">
             <Head title="カテゴリー設定" />
 
-            <CategoriesPageMain
+            <CategorySettingPageMain
                 year={year}
                 categoryProcessing={categoryProcessing}
                 categoryData={categoryData}
