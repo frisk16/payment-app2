@@ -43,7 +43,7 @@ const BasePaymentsPage: FC<Props> = memo((props) => {
             paymentData,
             order: route().params.order,
         });
-    }, [paymentProcessing]);
+    }, [paymentProcessing === true]);
 
     return (
         <AuthenticatedLayout user={auth.user} title={pageTitle} >
