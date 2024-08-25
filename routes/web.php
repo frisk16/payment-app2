@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MethodController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +33,10 @@ Route::middleware(['auth', 'verified'])->controller(CategoryController::class)->
     Route::post('/categories/api/store', 'store')->name('categories.store');
     Route::get('/categories/{id}', 'show_page')->name('categories.show');
     Route::put('/categories/{id}/api/destroy', 'destroy')->name('categories.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->controller(MethodController::class)->group(function() {
+    Route::get('/methods', 'setting_page')->name('methods.setting');
 });
 
 Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function() {

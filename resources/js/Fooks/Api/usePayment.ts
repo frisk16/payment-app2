@@ -22,6 +22,7 @@ export type PaymentApiProps = {
 
 const usePayment = () => {
     const [paymentData, setPaymentData] = useState<PaymentData | null>({
+        methodId: null,
         name: "",
         price: "",
         date: "",
@@ -48,6 +49,7 @@ const usePayment = () => {
      */
     const resetData = useCallback(() => {
         setPaymentData({
+            methodId: null,
             name: "",
             price: "",
             date: "",

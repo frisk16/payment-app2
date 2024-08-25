@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class Method extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
         'name',
-        'price',
-        'date',
     ];
 
     public function user()
@@ -21,13 +19,8 @@ class Payment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function method()
+    public function payments()
     {
-        return $this->belongsTo(Method::class);
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class)->withTimestamps();
+        return $this->hasMany(Payment::class);
     }
 }

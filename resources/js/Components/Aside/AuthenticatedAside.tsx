@@ -71,10 +71,10 @@ const AuthenticatedAside: FC = memo(() => {
                         </AsideAccordionItem>
 
                         <AsideAccordionItem
-                            title="支払い方法詳細"
+                            title="決済方法詳細"
                             leftIcon={<QuestionIcon />}
                         >
-                            <AsideAccordionButton title="支払い方法管理" rightIcon={<SettingsIcon />} />
+                            <AsideAccordionButton href={route("methods.setting")} title="決済方法管理" rightIcon={<SettingsIcon />} />
                         </AsideAccordionItem>
 
                         <AsideAccordionItem

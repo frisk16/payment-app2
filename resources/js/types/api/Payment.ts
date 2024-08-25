@@ -1,6 +1,7 @@
 
 export type Payment = {
     id: number;
+    methodId: number | null;
     name: string;
     price: string;
     date: string;
@@ -14,6 +15,7 @@ export type PaymentPageInfo = {
 };
 
 export type PaymentData = {
+    methodId: number | null;
     name: string;
     price: string;
     date: string;
