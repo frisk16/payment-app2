@@ -46,10 +46,11 @@ const useCategory = () => {
     }, []);
 
     const addCategory = useCallback((props: CategoryApiProps) => {
-        const { categoryData } = props;
+        const { categories = null, categoryData = null } = props;
 
         setCategoryProcessing(true);
         axios.post(route("categories.store"), {
+            categories,
             categoryData
         })
         .then((res) => {
@@ -58,19 +59,16 @@ const useCategory = () => {
                 setCategoryError({
                     name: res.data.errors.name,
                 });
-                setCategoryProcessing(false);
             } else {
-                getMessage({ title: "カテゴリー追加中...", status: "success" });
-                setTimeout(() => {
-                    location.reload();
-                }, 500);
+                setCategories([...categories!, res.data.category]);
+                getMessage({ title: "カテゴリーを追加しました", status: "success" });
             }
         })
         .catch((err) => {
             getMessage({ title: "追加時にエラー発生", status: "error" });
             console.log(err);
-            setCategoryProcessing(false);
-        });
+        })
+        .finally(() => setCategoryProcessing(false));
     }, []);
 
     const deleteCategory = useCallback((props: CategoryApiProps) => {

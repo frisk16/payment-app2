@@ -13,6 +13,7 @@ class MethodController extends Controller
 {
     private function validator($data)
     {
+        // 
         return Validator::make($data, [
             'image' => ['required'],
             'name' => ['required', 'max:10', 'string'],
@@ -67,70 +68,77 @@ class MethodController extends Controller
         ]);
     }
 
-    // /**
-    //  * カテゴリー取得
-    //  */
-    // public function get_categories()
-    // {
-    //     $categories = Auth::user()->categories()->get();
+    /**
+     * 決済データ取得
+     */
+    public function get_methods()
+    {
+        // 
+        $methods = Auth::user()->methods()->get();
 
-    //     return response()->json([
-    //         'categories' => $categories,
-    //     ]);
-    // }
+        return response()->json([
+            'methods' => $methods,
+        ]);
+    }
 
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    //     $data = $request->categoryData;
-    //     $validator = $this->validator($data);
 
-    //     if (Auth::user()->categories()->where('name', $data['name'])->first()) {
-    //         return response()->json([
-    //             'errors' => ['name' => '既に存在します'],
-    //         ]);
-    //     }
+    /**---------------
+     * データ操作
+     -----------------*/
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'errors' => $validator->errors(),
-    //         ]);
-    //     }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+        $data = $request->methodData;
+        $validator = $this->validator($data);
 
-    //     $category = Category::create([
-    //         'user_id' => Auth::id(),
-    //         'name' => $data['name'],
-    //     ]);
+        if (Auth::user()->methods()->where('name', $data['name'])->first()) {
+            return response()->json([
+                'errors' => ['name' => '既に存在します'],
+            ]);
+        }
 
-    //     return response()->json([
-    //         'category' => $category,
-    //     ]);
-    // }
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ]);
+        }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, Category $category)
-    // {
-    //     //
-    // }
+        $method = Method::create([
+            'user_id' => Auth::id(),
+            'image' => $data['image'],
+            'name' => $data['name'],
+        ]);
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    //     $category = Category::find($id);
-    //     $name = $category->name;
-    //     $category->delete();
+        return response()->json([
+            'method' => $method,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        //
+        $method = Method::find($id);
+        $name = $method->name;
+        $method->delete();
         
-    //     return response()->json([
-    //         'name' => $name,
-    //     ]);
-    // }
+        return response()->json([
+            'name' => $name,
+        ]);
+    }
 }

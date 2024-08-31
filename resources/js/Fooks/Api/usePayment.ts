@@ -12,6 +12,7 @@ export type PaymentApiProps = {
     paymentData?: PaymentData | null;
     paymentId?: number;
     categoryId?: number;
+    methodId?: number;
     deleteIds?: Array<Number>;
     order?: string;
     data?: Array<Number>;
@@ -119,6 +120,32 @@ const usePayment = () => {
 
         setPaymentProcessing(true);
         axios.get(route("payments.get_category_payments", {id: categoryId}), {
+            params: {
+                year,
+                month,
+                page,
+            }
+        })
+        .then((res) => {
+            setPayments(res.data.payments.data);
+            setPaymentPageInfo(res.data.payments);
+            setTotalPrice(res.data.totalPrice);
+        })
+        .catch((err) => {
+            getMessage({ title: "データが取得できませんでした", status: "error" });
+            console.log(err);
+        })
+        .finally(() => setPaymentProcessing(false));
+    }, []);
+
+    /**
+     * 決済情報毎のデータ取得
+     */
+    const getMethodPayments = useCallback((props: PaymentApiProps) => {
+        const { year = 2024, month = 1, methodId = null, page = 1 } = props;
+
+        setPaymentProcessing(true);
+        axios.get(route("payments.get_method_payments", {id: methodId}), {
             params: {
                 year,
                 month,
@@ -308,6 +335,7 @@ const usePayment = () => {
         totalPrice,
         getCurrentPayments,
         getCategoryPayments,
+        getMethodPayments,
         addPayment,
         editPayment,
         deletePayment,

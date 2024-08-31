@@ -1,4 +1,5 @@
 import CategoryBadge from "@/Components/Badge/CategoryBadge";
+import DeleteIconButton from "@/Components/Button/DeleteIconButton";
 import DeleteCategoryModal from "@/Components/Modal/DeleteCategoryModal";
 import { Category } from "@/types/api/Category";
 import { CategoriesPageProps } from "@/types/page/CategoriesPage";
@@ -22,7 +23,7 @@ const CategorySettingProgress: FC<Props & CategoriesPageProps> = (props) => {
 
     useMemo(() => {
         const currentPaymentsCounter = paymentsCounter.find((counter) => counter.id === category!.id);
-        setCount(currentPaymentsCounter!.count);
+        setCount(currentPaymentsCounter?.count ?? 0);
     }, []);
 
     return (
@@ -38,8 +39,8 @@ const CategorySettingProgress: FC<Props & CategoriesPageProps> = (props) => {
                             <CategoryBadge fontSize={{ base: "1.1em", md: "1.2em" }}>{category!.name}</CategoryBadge>
                             <Text fontSize="0.8em">データ件数：{count}件／500件</Text>
                         </Box>
-                        <Box ms="auto" color="red" cursor="pointer" onClick={handleOpenModal}>
-                            <DeleteIcon />
+                        <Box ms="auto">
+                            <DeleteIconButton onClick={handleOpenModal} />
                         </Box>
                     </Flex>
                     <Box mt={2}>

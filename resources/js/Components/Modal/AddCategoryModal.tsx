@@ -25,7 +25,7 @@ const AddCategoryModal: FC<Props & CategoriesPageProps> = memo((props) => {
 
     
     const handleAddCategory = () => {
-        addCategory({ categoryData });
+        addCategory({ categories, categoryData });
     };    
 
     return (

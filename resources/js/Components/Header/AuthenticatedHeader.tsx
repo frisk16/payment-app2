@@ -2,7 +2,6 @@ import MenuDrawer from "@/Components/Drawer/MenuDrawer";
 import HeaderActiveLinkButton from "@/Components/Header/HeaderActiveLinkButton";
 import HeaderLinkButton from "@/Components/Header/HeaderLinkButton";
 import AppIcon from "@/Components/Icon/AppIcon";
-import useAccordionOption from "@/Fooks/useAccordionOption";
 import { User } from "@/types";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, useDisclosure } from "@chakra-ui/react";
@@ -17,7 +16,6 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
     const { title, user } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { accordionIndex } = useAccordionOption();
 
     return (
         <header>
@@ -107,7 +105,7 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
                 </Flex>
             </Box>
 
-            <MenuDrawer isOpen={isOpen} onClose={onClose} accordionIndex={accordionIndex} />
+            <MenuDrawer isOpen={isOpen} onClose={onClose} />
         </header>
     )
 });
