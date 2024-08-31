@@ -1,16 +1,20 @@
 import AsideAccordionButton from "@/Components/Aside/AsideAccordionButton";
 import AsideAccordionItem from "@/Components/Aside/AsideAccordionItem";
-import Loading from "@/Components/Progress/Loading";
 import useCategory from "@/Fooks/Api/useCategory";
 import useMethod from "@/Fooks/Api/useMethod";
 import useAccordionOption from "@/Fooks/useAccordionOption";
 import { CalendarIcon, ChatIcon, QuestionIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Accordion, Box } from "@chakra-ui/react";
 import axios from "axios";
-import { FC, memo, useEffect, useState } from "react";
+import { Dispatch, FC, memo, SetStateAction, useEffect, useState } from "react";
 
-const MenuAccordion: FC = memo(() => {
-    const [logoutProcessing, setLogoutProcessing] = useState(false);
+type Props = {
+    setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
+};
+
+const MenuAccordion: FC<Props> = memo((props) => {
+    const { setLogoutProcessing } = props;
+
     const { accordionIndex } = useAccordionOption();
     const { categories, getCategories } = useCategory();
     const { methods, getMethods } = useMethod();
@@ -30,10 +34,6 @@ const MenuAccordion: FC = memo(() => {
 
     return (
         <Box>
-            {logoutProcessing && (
-                <Loading />
-            )}
-
             <Accordion defaultIndex={accordionIndex} allowMultiple>
 
                 <AsideAccordionItem

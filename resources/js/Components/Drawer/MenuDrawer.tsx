@@ -1,15 +1,16 @@
 import MenuAccordion from "@/Components/Accordion/MenuAccordion";
 import AppIcon from "@/Components/Icon/AppIcon";
 import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
-import { FC, memo } from "react";
+import { Dispatch, FC, memo, SetStateAction } from "react";
 
 type Props = {
     isOpen: boolean;
     onClose: () => void;
+    setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
 const MenuDrawer: FC<Props> = memo((props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose, setLogoutProcessing } = props;
 
     return (
         <Drawer
@@ -29,7 +30,9 @@ const MenuDrawer: FC<Props> = memo((props) => {
                 </DrawerHeader>
                 <DrawerBody p={0} bg="gray.300">
 
-                    <MenuAccordion />
+                    <MenuAccordion
+                        setLogoutProcessing={setLogoutProcessing}
+                    />
 
                 </DrawerBody>
             </DrawerContent>

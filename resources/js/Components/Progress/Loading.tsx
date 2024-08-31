@@ -7,7 +7,7 @@ const Loading: FC = () => {
             display="flex"
             flexDirection="column"
             position="fixed"
-            zIndex={30}
+            zIndex={2000}
             inset={0}
             bg="rgba(255, 255, 255, 0.5)"
         >

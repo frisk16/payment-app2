@@ -5,15 +5,16 @@ import AppIcon from "@/Components/Icon/AppIcon";
 import { User } from "@/types";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, useDisclosure } from "@chakra-ui/react";
-import { FC, memo } from "react";
+import { Dispatch, FC, memo, SetStateAction } from "react";
 
 type Props = {
     title: string;
     user: User;
+    setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
 const AuthenticatedHeader: FC<Props> = memo((props) => {
-    const { title, user } = props;
+    const { title, user, setLogoutProcessing } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -105,7 +106,12 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
                 </Flex>
             </Box>
 
-            <MenuDrawer isOpen={isOpen} onClose={onClose} />
+            <MenuDrawer
+                isOpen={isOpen}
+                onClose={onClose}
+                setLogoutProcessing={setLogoutProcessing}
+            />
+            
         </header>
     )
 });

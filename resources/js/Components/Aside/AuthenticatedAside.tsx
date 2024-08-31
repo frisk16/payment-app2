@@ -1,9 +1,15 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { FC, memo } from "react";
+import { Dispatch, FC, memo, SetStateAction } from "react";
 import AppIcon from "@/Components/Icon/AppIcon";
 import MenuAccordion from "@/Components/Accordion/MenuAccordion";
 
-const AuthenticatedAside: FC = memo(() => {    
+type Props = {
+    setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
+};
+
+const AuthenticatedAside: FC<Props> = memo((props) => {    
+    const { setLogoutProcessing } = props;
+    
     return (
         <aside>
             <Box
@@ -20,7 +26,9 @@ const AuthenticatedAside: FC = memo(() => {
                     <Heading size="sm" mt={4} >帳簿管理サイト</Heading>
                 </Box>
 
-                <MenuAccordion />
+                <MenuAccordion
+                    setLogoutProcessing={setLogoutProcessing}
+                />
 
             </Box>
         </aside>
