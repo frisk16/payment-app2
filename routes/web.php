@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified'])->controller(MethodController::class)->gr
     Route::get('/methods/api/get', 'get_methods')->name('methods.get');
     Route::post('/methods/api/store', 'store')->name('methods.store');
     Route::get('/methods/{id}', 'show_page')->name('methods.show');
-    Route::post('/methods/{id}/api/destroy', 'destroy')->name('methods.destroy');
+    Route::put('/methods/{id}/api/destroy', 'destroy')->name('methods.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->controller(PaymentController::class)->group(function() {

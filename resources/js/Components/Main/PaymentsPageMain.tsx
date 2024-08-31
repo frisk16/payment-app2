@@ -1,5 +1,6 @@
 import DeletePaymentAsideMenu from "@/Components/Aside/DeletePyamentAsideMenu";
 import PaymentCategory from "@/Components/Badge/PaymentCategory";
+import PaymentMethod from "@/Components/Badge/PaymentMethod";
 import NotFound from "@/Components/Default/NotFound";
 import EditPaymentModal from "@/Components/Modal/EditPaymentModal";
 import Loading from "@/Components/Progress/Loading";
@@ -69,8 +70,8 @@ const PaymentsPageMain: FC<PaymentsPageProps> = memo((props) => {
 
                             <Divider color="gray.300" />
 
-                            <CardFooter fontSize="0.8em" p={0} alignItems="center">
-                                <Text ms={4}>支払い：不明</Text>
+                            <CardFooter fontSize="0.8em" p={0} ps={4} alignItems="center">
+                                <PaymentMethod paymentId={payment.id} />
                                 <Box ms="auto">
                                     <Button
                                         borderRadius={0}

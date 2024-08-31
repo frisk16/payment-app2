@@ -1,25 +1,22 @@
 import DangerButton from "@/Components/Button/DangerButton";
 import DisableButton from "@/Components/Button/DisableButton";
-import usePayment from "@/Fooks/Api/usePayment";
-import { PaymentsPageProps } from "@/types/page/PaymentsPage";
+import { Method } from "@/types/api/Method";
+import { MethodsPageProps } from "@/types/page/MethodsPage";
 import { Heading, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 type Props = {
     isOpen: boolean;
     onClose: () => void;
-    deleteIds: Array<Number>;
-    resetData: () => void;
+    method: Method;
 };
 
-const DeletePaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
-    const { isOpen, onClose, deletePayment, payments, deleteIds, resetData } = props;
+const DeleteMethodModal: FC<Props & MethodsPageProps> = memo((props) => {
+    const { isOpen, onClose, method, methods, methodProcessing, deleteMethod } = props;
 
-    const { loading, setLoading } = usePayment();
-
-    const handleDeletePayment = () => {
-        deletePayment({ payments, deleteIds, onClose, resetData, setLoading });
-    };
+    const handleDeleteCategory = () => {
+        deleteMethod({ id: method.id, methods });
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} isCentered>
@@ -27,7 +24,7 @@ const DeletePaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
             <ModalContent mx={4}>
                 <ModalHeader>
                     <Heading size="sm">
-                        {deleteIds.length}件のデータを削除します、よろしいですか？
+                        「{method.name}」を削除します、よろしいですか？
                     </Heading>
                 </ModalHeader>
                 <ModalCloseButton />
@@ -35,9 +32,9 @@ const DeletePaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
                     <DisableButton size="sm" onClick={onClose}>閉じる</DisableButton>
                     <DangerButton
                         size="sm"
-                        onClick={handleDeletePayment}
-                        loading={loading}
-                        disabled={loading}
+                        loading={methodProcessing}
+                        disabled={methodProcessing}
+                        onClick={handleDeleteCategory}
                     >
                         削除
                     </DangerButton>
@@ -47,4 +44,4 @@ const DeletePaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
     )
 });
 
-export default DeletePaymentModal;
+export default DeleteMethodModal;

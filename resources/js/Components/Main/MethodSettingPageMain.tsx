@@ -8,7 +8,7 @@ import { Card, CardHeader, Flex, Grid, GridItem, Heading, useDisclosure } from "
 import { FC, memo } from "react";
 
 const MethodSettingPageMain: FC<MethodsPageProps> = memo((props) => {
-    const { year, methods, methodProcessing, paymentsCounter, resetData, resetError } = props;
+    const { year, methods, methodProcessing, resetData, resetError } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     
@@ -44,7 +44,7 @@ const MethodSettingPageMain: FC<MethodsPageProps> = memo((props) => {
                         >
                             <MethodListCard
                                 method={method}
-                                paymentsCounter={paymentsCounter}
+                                {...props}
                             />
                         </GridItem>
                     ))}

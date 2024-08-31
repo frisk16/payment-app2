@@ -19,6 +19,7 @@ export type PaymentApiProps = {
     setCurrentCategories?: Dispatch<SetStateAction<Array<Category>>>;
     resetData?: () => void;
     onClose?: () => void;
+    setLoading?: Dispatch<SetStateAction<boolean>>;
 };
 
 const usePayment = () => {
@@ -42,6 +43,7 @@ const usePayment = () => {
     const [paymentPageInfo, setPaymentPageInfo] = useState<PaymentPageInfo | null>(null);
     const [totalPrice, setTotalPrice] = useState(0);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
+    const [loading, setLoading] = useState(false); 
     const { getMessage } = useMessage();
 
 
@@ -174,7 +176,9 @@ const usePayment = () => {
      * データ追加
      */
     const addPayment = useCallback((props: PaymentApiProps) => {
-        const { payments, paymentData = null, year = null, month = null, resetData = null } = props;
+        const { payments, paymentData = null, year = null, month = null, resetData = null, setLoading = null } = props;
+        
+        setLoading!(true);
         axios.post(route("payments.store"), {
             paymentData,
             year,
@@ -203,15 +207,17 @@ const usePayment = () => {
             .catch((err) => {
                 getMessage({ title: "データを追加できません", status: "error" });
                 console.log(err);
-            });
+            })
+            .finally(() => setLoading!(false));
     }, []);
 
     /**
      * データ編集
      */
     const editPayment = useCallback((props: PaymentApiProps) => {
-        const { payments, paymentData = null, paymentId = null, year = null, month = null } = props;
+        const { payments, paymentData = null, paymentId = null, year = null, month = null, setLoading = null } = props;
         
+        setLoading!(true);
         axios.put(route("payments.update", {id: paymentId}), {
             paymentData,
         })
@@ -250,15 +256,17 @@ const usePayment = () => {
             .catch((err) => {
                 getMessage({ title: "データを更新できません", status: "error" });
                 console.log(err);
-            });
+            })
+            .finally(() => setLoading!(false));
     }, []);
 
     /**
      * データ削除
      */
     const deletePayment = useCallback((props: PaymentApiProps) => {
-        const { payments, deleteIds = [], onClose = null, resetData = null } = props;
+        const { payments, deleteIds = [], onClose = null, resetData = null, setLoading = null } = props;
 
+        setLoading!(true);
         axios.put(route("payments.destroy"), {
             deleteIds,
         })
@@ -277,7 +285,8 @@ const usePayment = () => {
         .catch((err) => {
             getMessage({ title: "データを削除できません", status: "error" });
             console.log(err);
-        });
+        })
+        .finally(() => setLoading!(false));
     }, []);
 
     /**
@@ -335,7 +344,9 @@ const usePayment = () => {
         deletePayment,
         getCategoryLists,
         toggleCategory,
-        updateCount
+        updateCount,
+        loading,
+        setLoading
     };
 };
 

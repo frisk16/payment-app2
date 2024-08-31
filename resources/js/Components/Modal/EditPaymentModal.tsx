@@ -2,6 +2,7 @@ import DisableButton from "@/Components/Button/DisableButton";
 import SuccessButton from "@/Components/Button/SuccessButton";
 import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
+import usePayment from "@/Fooks/Api/usePayment";
 import { Payment } from "@/types/api/Payment";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
 import { FormControl, FormErrorMessage, Heading, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
@@ -16,6 +17,8 @@ type Props = {
 const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
     const { targetPayment, isOpen, onClose, paymentProcessing, payments, paymentError, paymentData, setPaymentData, resetError, editPayment, year, month } = props;
 
+    const { loading, setLoading } = usePayment();
+
     useEffect(() => {
         setPaymentData({
             ...paymentData!,
@@ -26,7 +29,7 @@ const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
     }, [isOpen]);
     
     const handleEditPayment = () => {
-        editPayment({ payments, paymentData, paymentId: targetPayment!.id, year, month });
+        editPayment({ payments, paymentData, paymentId: targetPayment!.id, year, month, setLoading });
     };    
 
     return (
@@ -91,8 +94,8 @@ const EditPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
                     <DisableButton onClick={onClose}>閉じる</DisableButton>
                     <SuccessButton
                         onClick={handleEditPayment}
-                        loading={paymentProcessing}
-                        disabled={paymentProcessing}
+                        loading={loading}
+                        disabled={loading}
                     >
                         更新
                     </SuccessButton>
