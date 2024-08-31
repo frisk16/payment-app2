@@ -175,7 +175,6 @@ const usePayment = () => {
      */
     const addPayment = useCallback((props: PaymentApiProps) => {
         const { payments, paymentData = null, year = null, month = null, resetData = null } = props;
-        setPaymentProcessing(true);
         axios.post(route("payments.store"), {
             paymentData,
             year,
@@ -204,8 +203,7 @@ const usePayment = () => {
             .catch((err) => {
                 getMessage({ title: "データを追加できません", status: "error" });
                 console.log(err);
-            })
-            .finally(() => setPaymentProcessing(false));        
+            });
     }, []);
 
     /**
@@ -214,7 +212,6 @@ const usePayment = () => {
     const editPayment = useCallback((props: PaymentApiProps) => {
         const { payments, paymentData = null, paymentId = null, year = null, month = null } = props;
         
-        setPaymentProcessing(true);
         axios.put(route("payments.update", {id: paymentId}), {
             paymentData,
         })
@@ -253,8 +250,7 @@ const usePayment = () => {
             .catch((err) => {
                 getMessage({ title: "データを更新できません", status: "error" });
                 console.log(err);
-            })
-            .finally(() => setPaymentProcessing(false));
+            });
     }, []);
 
     /**
@@ -263,7 +259,6 @@ const usePayment = () => {
     const deletePayment = useCallback((props: PaymentApiProps) => {
         const { payments, deleteIds = [], onClose = null, resetData = null } = props;
 
-        setPaymentProcessing(true);
         axios.put(route("payments.destroy"), {
             deleteIds,
         })
@@ -282,8 +277,7 @@ const usePayment = () => {
         .catch((err) => {
             getMessage({ title: "データを削除できません", status: "error" });
             console.log(err);
-        })
-        .finally(() => setPaymentProcessing(false));
+        });
     }, []);
 
     /**
