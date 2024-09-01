@@ -4,7 +4,7 @@ import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import usePayment from "@/Fooks/Api/usePayment";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
-import { FormControl, FormErrorMessage, Heading, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, Heading, InputGroup, InputRightElement, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -30,7 +30,6 @@ const AddPaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
                         支払いデータ追加
                     </Heading>
                 </ModalHeader>
-                <ModalCloseButton />
                 <ModalBody>
                     <Stack spacing={4}>
 

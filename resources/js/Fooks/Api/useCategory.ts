@@ -18,6 +18,7 @@ const useCategory = () => {
     })
     const [categoryProcessing, setCategoryProcessing] = useState(false);
     const [categories, setCategories] = useState<Array<Category>>([]);
+    const [updateCount, setUpdateCount] = useState(0);
     const { getMessage } = useMessage();
 
     const resetData = useCallback(() => {
@@ -61,6 +62,7 @@ const useCategory = () => {
                 });
             } else {
                 setCategories([...categories!, res.data.category]);
+                setUpdateCount((cnt) => cnt + 1);
                 getMessage({ title: "カテゴリーを追加しました", status: "success" });
             }
         })
@@ -75,11 +77,12 @@ const useCategory = () => {
         const { id = null, categories = null } = props;
 
         setCategoryProcessing(true);
-        axios.put(route("categories.destroy", {id}))
+        axios.put(route("categories.destroy", {category_id: id}))
             .then((res) => {
                 getMessage({ title: `「${res.data.name}」を削除しました`, status: "success" });
                 const newCategories = categories!.filter((data) => data.id !== id);
                 setCategories(newCategories);
+                setUpdateCount((cnt) => cnt + 1);
             })
             .catch((err) => {
                 getMessage({ title: "削除中にエラー発生", status: "error" });
@@ -93,6 +96,7 @@ const useCategory = () => {
         categoryData,
         categoryError,
         categories,
+        updateCount,
         resetData,
         resetError,
         setCategoryData,

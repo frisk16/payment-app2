@@ -19,6 +19,7 @@ const SettingPage: FC<Props> = (props) => {
         categoryData,
         categoryError,
         categories,
+        updateCount,
         resetData,
         resetError,
         setCategoryData,
@@ -30,7 +31,7 @@ const SettingPage: FC<Props> = (props) => {
     useEffect(() => getCategories(), []);
 
     return (
-        <AuthenticatedLayout user={auth.user} title="カテゴリー設定">
+        <AuthenticatedLayout user={auth.user} updateCount={updateCount} title="カテゴリー設定">
             <Head title="カテゴリー設定" />
 
             <CategorySettingPageMain

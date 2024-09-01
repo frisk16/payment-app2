@@ -2,7 +2,7 @@ import DangerButton from "@/Components/Button/DangerButton";
 import DisableButton from "@/Components/Button/DisableButton";
 import { CategoryApiProps } from "@/Fooks/Api/useCategory";
 import { Category } from "@/types/api/Category";
-import { Heading, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import { Heading, Modal, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -30,7 +30,6 @@ const DeleteCategoryModal: FC<Props> = memo((props) => {
                         「{category!.name}」を削除します、よろしいですか？
                     </Heading>
                 </ModalHeader>
-                <ModalCloseButton />
                 <ModalFooter gap={2}>
                     <DisableButton size="sm" onClick={onClose}>閉じる</DisableButton>
                     <DangerButton

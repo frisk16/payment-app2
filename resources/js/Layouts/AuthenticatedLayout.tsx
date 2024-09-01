@@ -9,11 +9,12 @@ import Loading from '@/Components/Progress/Loading';
 type Props = {
     title: string;
     user: User;
+    updateCount: number;
     children: ReactNode;
 };
 
 const AuthenticatedLayout: FC<Props> = memo((props) => {
-    const { title, user, children } = props;
+    const { title, user, updateCount, children } = props;
 
     const [logoutProcessing, setLogoutProcessing] = useState(false);
 
@@ -26,10 +27,12 @@ const AuthenticatedLayout: FC<Props> = memo((props) => {
             <AuthenticatedHeader
                 title={title}
                 user={user}
+                updateCount={updateCount}
                 setLogoutProcessing={setLogoutProcessing}    
             />
 
             <AuthenticatedAside
+                updateCount={updateCount}
                 setLogoutProcessing={setLogoutProcessing}
             />
 

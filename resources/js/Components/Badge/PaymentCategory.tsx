@@ -14,7 +14,7 @@ const PaymentCategory: FC<Props> = memo((props) => {
     const { paymentId } = props;
 
     const [currentCategories, setCurrentCategories] = useState<Array<Category>>([]);
-    const { getCategoryLists, toggleCategory, paymentProcessing } = usePayment();
+    const { getCategoryLists, toggleCategory } = usePayment();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => getCategoryLists({ paymentId, setCurrentCategories }), []);
@@ -38,7 +38,6 @@ const PaymentCategory: FC<Props> = memo((props) => {
                 paymentId={paymentId}
                 setCurrentCategories={setCurrentCategories}
                 toggleCategory={toggleCategory}
-                paymentProcessing={paymentProcessing}
                 isOpen={isOpen}
                 onClose={onClose}
             />

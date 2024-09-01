@@ -2,7 +2,7 @@ import DangerButton from "@/Components/Button/DangerButton";
 import DisableButton from "@/Components/Button/DisableButton";
 import usePayment from "@/Fooks/Api/usePayment";
 import { PaymentsPageProps } from "@/types/page/PaymentsPage";
-import { Heading, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import { Heading, Modal, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -30,7 +30,6 @@ const DeletePaymentModal: FC<Props & PaymentsPageProps> = memo((props) => {
                         {deleteIds.length}件のデータを削除します、よろしいですか？
                     </Heading>
                 </ModalHeader>
-                <ModalCloseButton />
                 <ModalFooter gap={2}>
                     <DisableButton size="sm" onClick={onClose}>閉じる</DisableButton>
                     <DangerButton

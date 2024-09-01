@@ -10,11 +10,12 @@ import { Dispatch, FC, memo, SetStateAction } from "react";
 type Props = {
     title: string;
     user: User;
+    updateCount: number;
     setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
 const AuthenticatedHeader: FC<Props> = memo((props) => {
-    const { title, user, setLogoutProcessing } = props;
+    const { title, user, updateCount, setLogoutProcessing } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -109,6 +110,7 @@ const AuthenticatedHeader: FC<Props> = memo((props) => {
             <MenuDrawer
                 isOpen={isOpen}
                 onClose={onClose}
+                updateCount={updateCount}
                 setLogoutProcessing={setLogoutProcessing}
             />
             

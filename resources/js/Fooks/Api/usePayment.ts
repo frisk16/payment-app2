@@ -1,5 +1,6 @@
 import useMessage from "@/Fooks/useMessage";
 import { Category } from "@/types/api/Category";
+import { Method } from "@/types/api/Method";
 import { Payment, PaymentData, PaymentError, PaymentPageInfo } from "@/types/api/Payment";
 import axios from "axios";
 import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from "react";
@@ -15,8 +16,9 @@ export type PaymentApiProps = {
     methodId?: number;
     deleteIds?: Array<Number>;
     order?: string;
-    data?: Array<Number>;
+    data?: Array<Number> | number;
     setCurrentCategories?: Dispatch<SetStateAction<Array<Category>>>;
+    setCurrentMethod?: Dispatch<SetStateAction<Method | null>>;
     resetData?: () => void;
     onClose?: () => void;
     setLoading?: Dispatch<SetStateAction<boolean>>;
@@ -121,7 +123,7 @@ const usePayment = () => {
         const { year = 2024, month = 1, categoryId = null, page = 1 } = props;
 
         setPaymentProcessing(true);
-        axios.get(route("payments.get_category_payments", {id: categoryId}), {
+        axios.get(route("payments.get_category_payments", {category_id: categoryId}), {
             params: {
                 year,
                 month,
@@ -147,7 +149,7 @@ const usePayment = () => {
         const { year = 2024, month = 1, methodId = null, page = 1 } = props;
 
         setPaymentProcessing(true);
-        axios.get(route("payments.get_method_payments", {id: methodId}), {
+        axios.get(route("payments.get_method_payments", {method_id: methodId}), {
             params: {
                 year,
                 month,
@@ -218,7 +220,7 @@ const usePayment = () => {
         const { payments, paymentData = null, paymentId = null, year = null, month = null, setLoading = null } = props;
         
         setLoading!(true);
-        axios.put(route("payments.update", {id: paymentId}), {
+        axios.put(route("payments.update", {payment_id: paymentId}), {
             paymentData,
         })
             .then((res) => {
@@ -289,13 +291,19 @@ const usePayment = () => {
         .finally(() => setLoading!(false));
     }, []);
 
+
+
+    /**------------------------
+     * タグ関連
+     -------------------------*/
+
     /**
      * 各データ毎のカテゴリー取得
      */
     const getCategoryLists = useCallback((props: PaymentApiProps) => {
         const { paymentId = null, setCurrentCategories = null } = props;
 
-        axios.get(route("payments.get_categories", {id: paymentId}))
+        axios.get(route("payments.get_categories", {payment_id: paymentId}))
             .then((res) => setCurrentCategories!(res.data.categories))
             .catch((err) => console.log(err));
     }, []);
@@ -304,10 +312,10 @@ const usePayment = () => {
      * 各データのカテゴリー追加、削除
      */
     const toggleCategory = useCallback((props: PaymentApiProps) => {
-        const { paymentId = null, data = [], setCurrentCategories = null } = props;
+        const { paymentId = null, data = [], setCurrentCategories = null, setLoading = null } = props;
 
-        setPaymentProcessing(true);
-        axios.put(route("payments.toggle_category", {id: paymentId}), {
+        setLoading!(true);
+        axios.put(route("payments.toggle_category", {payment_id: paymentId}), {
             data
         })
         .then((res) => {
@@ -322,7 +330,41 @@ const usePayment = () => {
             getMessage({ title: "タグ更新中にエラーが発生しました", status: "error" });
             console.log(err);
         })
-        .finally(() => setPaymentProcessing(false));
+        .finally(() => setLoading!(false));
+    }, []);
+
+    /**
+     * 各データ毎の決済情報取得
+     */
+    const getMethodList = useCallback((props: PaymentApiProps) => {
+        const { paymentId = null, setCurrentMethod = null } = props;
+
+        axios.get(route("payments.get_method", {payment_id: paymentId}))
+            .then((res) => {
+                setCurrentMethod!(res.data.method);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    /**
+     * 各データ毎の決済タグ変更
+     */
+    const toggleMethod = useCallback((props: PaymentApiProps) => {
+        const { paymentId = null, data = null, setCurrentMethod = null, setLoading = null } = props;
+
+        setLoading!(true);
+        axios.put(route("payments.toggle_method", {payment_id: paymentId}), {
+            data
+        })
+        .then((res) => {
+            getMessage({ title: "タグを更新しました", status: "success" });
+            setCurrentMethod!(res.data.currentMethod);
+        })
+        .catch((err) => {
+            getMessage({ title: "タグ更新中にエラーが発生しました", status: "error" });
+            console.log(err);
+        })
+        .finally(() => setLoading!(false));
     }, []);
 
     return {
@@ -344,6 +386,8 @@ const usePayment = () => {
         deletePayment,
         getCategoryLists,
         toggleCategory,
+        getMethodList,
+        toggleMethod,
         updateCount,
         loading,
         setLoading

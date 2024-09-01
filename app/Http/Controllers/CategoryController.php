@@ -48,10 +48,10 @@ class CategoryController extends Controller
     /**
      * カテゴリー毎の支払い詳細ページ
      */
-    public function show_page($id)
+    public function show_page($category_id)
     {
         // 
-        $category = Auth::user()->categories()->where('id', $id)->first();
+        $category = Auth::user()->categories()->where('id', $category_id)->first();
         if (! $category) {
             return to_route("categories.setting");
         }
@@ -112,7 +112,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $category_id)
     {
         //
     }
@@ -120,10 +120,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($category_id)
     {
         //
-        $category = Category::find($id);
+        $category = Category::find($category_id);
         $name = $category->name;
         $category->delete();
         

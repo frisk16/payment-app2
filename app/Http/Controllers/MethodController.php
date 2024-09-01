@@ -51,10 +51,10 @@ class MethodController extends Controller
     /**
      * 決済方法毎の支払い詳細ページ
      */
-    public function show_page($id)
+    public function show_page($method_id)
     {
         // 
-        $method = Auth::user()->methods()->where('id', $id)->first();
+        $method = Auth::user()->methods()->where('id', $method_id)->first();
         if (! $method) {
             return to_route("methods.setting");
         }
@@ -122,7 +122,7 @@ class MethodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $method_id)
     {
         //
     }
@@ -130,10 +130,10 @@ class MethodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($method_id)
     {
         //
-        $method = Method::find($id);
+        $method = Method::find($method_id);
         $name = $method->name;
         $method->delete();
         

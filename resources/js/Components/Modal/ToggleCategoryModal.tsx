@@ -13,15 +13,15 @@ type Props = {
     paymentId: number;
     setCurrentCategories: Dispatch<SetStateAction<Array<Category>>>;
     toggleCategory: (props: PaymentApiProps) => void;
-    paymentProcessing: boolean;
     isOpen: boolean;
     onClose: () => void;
 };
 
 const ToggleCategoryModal: FC<Props> = memo((props) => {
-    const { paymentId, setCurrentCategories, toggleCategory, paymentProcessing, isOpen, onClose } = props;
+    const { paymentId, setCurrentCategories, toggleCategory, isOpen, onClose } = props;
 
     const [data, setData] = useState<Array<Number>>([]);
+    const [loading, setLoading] = useState(false);
     const { categories, getCategories } = useCategory();
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ const ToggleCategoryModal: FC<Props> = memo((props) => {
     };
 
     const handleToggleCategory = () => {
-        toggleCategory({ paymentId, data, setCurrentCategories });
+        toggleCategory({ paymentId, data, setCurrentCategories, setLoading });
     };
 
     useEffect(() => getCategories(), []);
@@ -73,8 +73,8 @@ const ToggleCategoryModal: FC<Props> = memo((props) => {
                     <DisableButton onClick={onClose}>閉じる</DisableButton>
                     <SuccessButton
                         onClick={handleToggleCategory}
-                        disabled={!categories[0] || paymentProcessing}
-                        loading={paymentProcessing}
+                        disabled={!categories[0] || loading}
+                        loading={loading}
                     >
                         更新
                     </SuccessButton>

@@ -4,11 +4,12 @@ import AppIcon from "@/Components/Icon/AppIcon";
 import MenuAccordion from "@/Components/Accordion/MenuAccordion";
 
 type Props = {
+    updateCount: number;
     setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
 const AuthenticatedAside: FC<Props> = memo((props) => {    
-    const { setLogoutProcessing } = props;
+    const { updateCount, setLogoutProcessing } = props;
     
     return (
         <aside>
@@ -27,6 +28,7 @@ const AuthenticatedAside: FC<Props> = memo((props) => {
                 </Box>
 
                 <MenuAccordion
+                    updateCount={updateCount}
                     setLogoutProcessing={setLogoutProcessing}
                 />
 

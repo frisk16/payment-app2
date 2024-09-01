@@ -19,7 +19,7 @@ const AsideAccordionItem: FC<Props> = memo((props) => {
                 </Box>
                 <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel p={0}>
+            <AccordionPanel p={0} maxH="280px" overflowY="scroll">
                 {children}
             </AccordionPanel>
         </AccordionItem>

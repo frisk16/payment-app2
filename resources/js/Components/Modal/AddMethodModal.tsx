@@ -5,7 +5,7 @@ import SInput from "@/Components/Form/SInput";
 import SRadio from "@/Components/Form/SRadio";
 import { methodIcons } from "@/Components/Icon/MethodIcon";
 import { MethodsPageProps } from "@/types/page/MethodsPage";
-import { FormControl, FormErrorMessage, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, RadioGroup, Stack } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, Heading, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, RadioGroup, Stack } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -39,7 +39,6 @@ const AddMethodModal: FC<Props & MethodsPageProps> = memo((props) => {
                         決済情報追加
                     </Heading>
                 </ModalHeader>
-                <ModalCloseButton />
                 <ModalBody>
                     <Stack spacing={4}>
 

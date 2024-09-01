@@ -10,10 +10,11 @@ import { Dispatch, FC, memo, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
     setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
+    updateCount: number;
 };
 
 const MenuAccordion: FC<Props> = memo((props) => {
-    const { setLogoutProcessing } = props;
+    const { setLogoutProcessing, updateCount } = props;
 
     const { accordionIndex } = useAccordionOption();
     const { categories, getCategories } = useCategory();
@@ -22,7 +23,7 @@ const MenuAccordion: FC<Props> = memo((props) => {
     useEffect(() => {
         getCategories();
         getMethods();
-    }, []);
+    }, [updateCount]);
 
     const logout = () => {
         setLogoutProcessing(true);

@@ -6,11 +6,12 @@ import { Dispatch, FC, memo, SetStateAction } from "react";
 type Props = {
     isOpen: boolean;
     onClose: () => void;
+    updateCount: number;
     setLogoutProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
 const MenuDrawer: FC<Props> = memo((props) => {
-    const { isOpen, onClose, setLogoutProcessing } = props;
+    const { isOpen, onClose, updateCount, setLogoutProcessing } = props;
 
     return (
         <Drawer
@@ -32,6 +33,7 @@ const MenuDrawer: FC<Props> = memo((props) => {
 
                     <MenuAccordion
                         setLogoutProcessing={setLogoutProcessing}
+                        updateCount={updateCount}
                     />
 
                 </DrawerBody>

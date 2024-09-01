@@ -32,7 +32,7 @@ const MethodListCard: FC<Props & MethodsPageProps> = memo((props) => {
                         <Heading size="sm">{method.name}</Heading>
                         <Divider border="1px solid gray" />
                         <Text fontSize="0.8em">
-                            データ件数：{countData?.count ?? 0}
+                            データ件数：{countData?.count ?? 0}件
                         </Text>
                     </Box>
                 </Flex>

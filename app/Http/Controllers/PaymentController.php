@@ -139,9 +139,9 @@ class PaymentController extends Controller
     /**
      * カテゴリー毎のデータ取得
      */
-    public function get_category_payments(Request $request, $id)
+    public function get_category_payments(Request $request, $category_id)
     {
-        $base_payments = Category::find($id)->payments()->whereYear('date', $request->year)->whereMonth('date', $request->month);
+        $base_payments = Category::find($category_id)->payments()->whereYear('date', $request->year)->whereMonth('date', $request->month);
         $payments = $base_payments->orderBy('date', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
         $total_price = $base_payments->sum('price');
     
@@ -154,9 +154,9 @@ class PaymentController extends Controller
     /**
      * 決済情報毎のデータ取得
      */
-    public function get_method_payments(Request $request, $id)
+    public function get_method_payments(Request $request, $method_id)
     {
-        $base_payments = Method::find($id)->payments()->whereYear('date', $request->year)->whereMonth('date', $request->month);
+        $base_payments = Method::find($method_id)->payments()->whereYear('date', $request->year)->whereMonth('date', $request->month);
         $payments = $base_payments->orderBy('date', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
         $total_price = $base_payments->sum('price');
     
@@ -202,7 +202,7 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $payment_id)
     {
         //
         $data = $request->paymentData;
@@ -214,7 +214,7 @@ class PaymentController extends Controller
             ]);
         }
 
-        $payment = Payment::find($id);
+        $payment = Payment::find($payment_id);
         $payment->name = $data['name'];
         $payment->price = $data['price'];
         $payment->date = $data['date'];
@@ -243,20 +243,20 @@ class PaymentController extends Controller
     /**
      * 各データ毎のカテゴリータグ取得
      */
-    public function get_categories($id)
+    public function get_categories($payment_id)
     {
         // 
-        $categories = Payment::find($id)->categories()->get();
+        $categories = Payment::find($payment_id)->categories()->get();
 
         return response()->json([
             'categories' => $categories,
         ]);
     }
-
+    
     /**
      * 各データ毎のカテゴリー追加、削除
      */
-    public function toggle_category(Request $request, $id)
+    public function toggle_category(Request $request, $payment_id)
     {
         // 
         if (count($request->data) > 3) {
@@ -264,14 +264,43 @@ class PaymentController extends Controller
                 'error' => '最大3つまで登録可能',
             ]);
         }
-
-        $payment = Payment::find($id);
+        
+        $payment = Payment::find($payment_id);
         $payment->categories()->sync($request->data);
-
+        
         $current_categories = $payment->categories()->get();
-
+        
         return response()->json([
             'currentCategories' => $current_categories,
+        ]);
+    }
+
+    /**
+     * 各データ毎の決済タグ取得
+     */
+    public function get_method($payment_id)
+    {
+        // 
+        $method = Payment::find($payment_id)->method()->first();
+    
+        return response()->json([
+            'method' => $method,
+        ]);
+    }
+
+    /**
+     * 各データの決済タグ変更
+     */
+    public function toggle_method(Request $request, $payment_id)
+    {
+        // 
+        $payment = Payment::find($payment_id);
+        $method_id = $request->data !== 0 ? $request->data : null;
+        $payment->method_id = $method_id;
+        $payment->update();
+
+        return response()->json([
+            'currentMethod' => $payment->method()->first(),
         ]);
     }
 }

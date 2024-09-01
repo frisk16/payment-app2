@@ -19,6 +19,7 @@ const SettingPage: FC<Props> = (props) => {
         methodData,
         methodError,
         methods,
+        updateCount,
         resetData,
         resetError,
         setMethodData,
@@ -30,7 +31,7 @@ const SettingPage: FC<Props> = (props) => {
     useEffect(() => getMethods(), []);
 
     return (
-        <AuthenticatedLayout user={auth.user} title="決済方法設定">
+        <AuthenticatedLayout user={auth.user} updateCount={updateCount} title="決済方法設定">
             <Head title="決済方法設定" />
 
             <MethodSettingPageMain

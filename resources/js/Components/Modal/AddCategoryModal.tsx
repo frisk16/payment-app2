@@ -3,7 +3,7 @@ import PrimaryButton from "@/Components/Button/PrimaryButton";
 import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import { CategoriesPageProps } from "@/types/page/CategoriesPage";
-import { FormControl, FormErrorMessage, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, Heading, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react";
 import { FC, memo } from "react";
 
 type Props = {
@@ -37,7 +37,6 @@ const AddCategoryModal: FC<Props & CategoriesPageProps> = memo((props) => {
                         カテゴリー追加
                     </Heading>
                 </ModalHeader>
-                <ModalCloseButton />
                 <ModalBody>
                     <Stack spacing={4}>
 
