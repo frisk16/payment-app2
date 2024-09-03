@@ -24,11 +24,10 @@ const AddMethodModal: FC<Props & MethodsPageProps> = memo((props) => {
         setMethodData,
         addMethod,
     } = props;
-
     
     const handleAddCategory = () => {
         addMethod({ methodData, methods });
-    };    
+    };
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} isCentered>

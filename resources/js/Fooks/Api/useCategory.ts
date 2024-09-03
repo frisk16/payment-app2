@@ -58,12 +58,14 @@ const useCategory = () => {
             if (res.data.errors) {
                 getMessage({ title: "入力内容に誤りがあります", status: "warning" });
                 setCategoryError({
-                    name: res.data.errors.name,
+                    name: res.data.errors.name ?? "",
                 });
             } else {
                 setCategories([...categories!, res.data.category]);
                 setUpdateCount((cnt) => cnt + 1);
                 getMessage({ title: "カテゴリーを追加しました", status: "success" });
+                resetData();
+                resetError();
             }
         })
         .catch((err) => {

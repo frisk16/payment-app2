@@ -6,12 +6,13 @@ type Props = {
     value: string;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     size?: {};
+    checked?: boolean;
 };
 
 const SRadio: FC<Props> = (props) => {
-    const { children, value, onChange, size = { base: "sm", md: "md" } } = props;
+    const { children, value, onChange, size = { base: "sm", md: "md" }, checked = false } = props;
 
-    return <Radio value={value} onChange={onChange} size={size} colorScheme="green" >{children}</Radio>
+    return <Radio isChecked={checked} value={value} onChange={onChange} size={size} colorScheme="green" >{children}</Radio>
 };
 
 export default SRadio;

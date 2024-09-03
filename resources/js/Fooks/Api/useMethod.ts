@@ -61,13 +61,15 @@ const useMethod = () => {
             if (res.data.errors) {
                 getMessage({ title: "入力内容に誤りがあります", status: "warning" });
                 setMethodError({
-                    image: res.data.errors.image,
-                    name: res.data.errors.name,
+                    image: res.data.errors.image ?? "",
+                    name: res.data.errors.name ?? "",
                 });
             } else {
                 setMethods([...methods!, res.data.method]);
                 setUpdateCount((cnt) => cnt + 1);
                 getMessage({ title: "決済データを追加しました", status: "success" });
+                resetData();
+                resetError();
             }
         })
         .catch((err) => {
