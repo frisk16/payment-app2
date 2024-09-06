@@ -31,12 +31,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:10',
+            'name' => 'required|string|max:10|unique:'.User::class,
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'name.required' => 'ユーザー名は必須です',
             'name.max' => ':max 文字以内で入力',
+            'name.unique' => '既に存在します',
             'email.required' => 'Eメールアドレスは必須です',
             'email.email' => '正しく入力してください',
             'email.max' => '入力オーバーです',
@@ -56,6 +57,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // return redirect(route('dashboard', absolute: false));
+        return to_route('verification.notice');
     }
 }

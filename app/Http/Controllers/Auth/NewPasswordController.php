@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\User;
 
 class NewPasswordController extends Controller
 {
@@ -34,11 +35,24 @@ class NewPasswordController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        if (! User::where('email', $request->email)->first()) {
+            throw ValidationException::withMessages([
+                'email' => 'そのEメールアドレスは存在しません'
+            ]);
+        }
+
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'email.required' => '入力必須です',
+            'email.email' => '正しく入力してください',
+            'password.required' => '入力必須です',
+            'password.confirmed' => '確認用パスワードと一致しません',
+            'password.min' => '最低 :min 文字以上',
         ]);
+
 
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
@@ -59,7 +73,7 @@ class NewPasswordController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         if ($status == Password::PASSWORD_RESET) {
-            return redirect()->route('login')->with('status', __($status));
+            return redirect()->route('login')->with('status', 'パスワードを再設定しました、再度ログインしてください');
         }
 
         throw ValidationException::withMessages([

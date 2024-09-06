@@ -3,8 +3,9 @@ import SCheckbox from "@/Components/Form/SCheckbox";
 import SFormLabel from "@/Components/Form/SFormLabel";
 import SInput from "@/Components/Form/SInput";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { Card, CardBody, Container, FormControl, FormErrorMessage, Stack } from "@chakra-ui/react";
-import { Head, useForm } from "@inertiajs/react";
+import { WarningIcon } from "@chakra-ui/icons";
+import { Card, CardBody, Center, Container, FormControl, FormErrorMessage, Stack, Text } from "@chakra-ui/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { FC, memo, useEffect } from "react";
 
 type Props = {
@@ -27,7 +28,13 @@ const Login: FC<Props> = memo((props) => {
 
     return (
         <GuestLayout title="ログイン">
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && (
+                <Center mb={4}>
+                    <Text fontWeight="bold" color="green.500" fontSize="0.9em">
+                        {status}
+                    </Text>
+                </Center>
+            )}
 
             <Head title="ログイン" />
 
@@ -88,7 +95,7 @@ const Login: FC<Props> = memo((props) => {
                     </CardBody>
                 </Card>
                 
-                {/* <Center mt={12}>
+                <Center mt={12}>
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
@@ -97,7 +104,7 @@ const Login: FC<Props> = memo((props) => {
                             パスワードをお忘れですか？
                         </Link>
                     )}
-                </Center> */}
+                </Center>
 
             </Container>
 
