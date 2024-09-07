@@ -1,7 +1,7 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { Dispatch, FC, memo, SetStateAction } from "react";
-import AppIcon from "@/Components/Icon/AppIcon";
 import MenuAccordion from "@/Components/Accordion/MenuAccordion";
+import ThemeIcon from "@/Components/Icon/ThemeIcon";
 
 type Props = {
     updateCount: number;
@@ -22,9 +22,9 @@ const AuthenticatedAside: FC<Props> = memo((props) => {
                 bg="gray.300"
                 w={60}
             >
-                <Box h={32} p={4} borderBottom="2px solid #55f">
-                    <AppIcon fontSize={{ base: 48 }} />
-                    <Heading size="sm" mt={4} >帳簿管理サイト</Heading>
+                <Box p={4} borderBottom="2px solid #55f">
+                    <ThemeIcon w={{ base: 32 }} />
+                    <Heading mt={4} size="sm">帳簿管理システム</Heading>
                 </Box>
 
                 <MenuAccordion

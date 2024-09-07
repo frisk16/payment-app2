@@ -1,5 +1,5 @@
 import MenuAccordion from "@/Components/Accordion/MenuAccordion";
-import AppIcon from "@/Components/Icon/AppIcon";
+import ThemeIcon from "@/Components/Icon/ThemeIcon";
 import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
 import { Dispatch, FC, memo, SetStateAction } from "react";
 
@@ -24,9 +24,9 @@ const MenuDrawer: FC<Props> = memo((props) => {
             <DrawerContent bg="gray.100">
                 <DrawerCloseButton />
                 <DrawerHeader p={0}>
-                    <Box h={32} p={4} borderBottom="2px solid #55f">
-                        <AppIcon fontSize={{ base: 48 }} />
-                        <Heading size="sm" mt={4} >帳簿管理サイト</Heading>
+                    <Box p={4} borderBottom="2px solid #55f">
+                        <ThemeIcon w={{ base: 32 }} />
+                        <Heading mt={4} size="sm">帳簿管理システム</Heading>
                     </Box>
                 </DrawerHeader>
                 <DrawerBody p={0} bg="gray.300">

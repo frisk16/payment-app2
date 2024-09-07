@@ -1,6 +1,5 @@
-import ApplicationLogo from "@/Components/Default/ApplicationLogo";
+import ThemeIcon from "@/Components/Icon/ThemeIcon";
 import { Box, Center } from "@chakra-ui/react";
-import { Link } from "@inertiajs/react";
 import { FC, memo, ReactNode } from "react";
 
 type Props = {
@@ -12,12 +11,10 @@ const DefaultLayout: FC<Props> = memo((props) => {
 
     return (
         <Box mb={16}>
-            <Center my={16}>
-                <Link href="/">
-                    <ApplicationLogo height={64} />
-                </Link>
+            <Center my={8}>
+                <ThemeIcon />
             </Center>
-            
+
             {children}
         </Box>
     )
