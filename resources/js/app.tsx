@@ -7,7 +7,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@/theme';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || '帳簿管理システム';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
