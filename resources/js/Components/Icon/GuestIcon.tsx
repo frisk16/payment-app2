@@ -6,7 +6,7 @@ type Props = {
 };
 
 const GuestIcon: FC<Props> = (props) => {
-    const { w = { base: 14 } } = props;
+    const { w = { base: 12 } } = props;
 
     return <Image src="img/GuestIcon.png" w={w} />
 };

@@ -1,7 +1,7 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FC, memo } from 'react';
-import { Card, CardBody, Container, FormControl, FormErrorMessage, Stack } from '@chakra-ui/react';
+import { Card, CardBody, Container, FormControl, FormErrorMessage, Stack, Text } from '@chakra-ui/react';
 import PrimaryButton from '@/Components/Button/PrimaryButton';
 import SFormLabel from '@/Components/Form/SFormLabel';
 import SInput from '@/Components/Form/SInput';
@@ -26,7 +26,9 @@ const ForgotPassword: FC<Props> = memo((props) =>  {
                     登録中のEメールアドレス宛にパスワード再設定リンクを送信します
                 </div>
 
-                {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+                {status && (
+                    <Text color="green.500" fontWeight="bold" mb={4} fontSize="0.9em">{status}</Text>
+                )}
 
                 <Card>
                     <CardBody px={{ base: 8, lg: 32 }} py={16}>

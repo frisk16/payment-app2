@@ -16,7 +16,7 @@ const GuestLayout: FC<Props> = memo((props) => {
             <GuestHeader title={title} />
 
             <Center my={8}>
-                <ThemeIcon />
+                <ThemeIcon w={{ base: 32, md: 56 }} />
             </Center>
             
             {children}

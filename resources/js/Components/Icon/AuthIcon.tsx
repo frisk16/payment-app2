@@ -6,7 +6,7 @@ type Props = {
 };
 
 const AuthIcon: FC<Props> = (props) => {
-    const { w = { base: 14 } } = props;
+    const { w = { base: 12 } } = props;
 
     return <Image src="img/AuthIcon.png" w={w} />
 };

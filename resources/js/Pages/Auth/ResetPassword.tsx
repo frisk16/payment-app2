@@ -29,7 +29,7 @@ const ResetPassword: FC<Props> = memo((props) => {
 
     return (
         <DefaultLayout>
-            <Head title="Reset Password" />
+            <Head title="パスワード再設定" />
 
             <Container>
                 <Card>
@@ -55,6 +55,7 @@ const ResetPassword: FC<Props> = memo((props) => {
                                     type="password"
                                     name="password"
                                     value={data.password}
+                                    placeholder="最低8文字以上"
                                     onChange={(e) => setData("password", e.target.value)}
                                 />
                                 {errors.password !== undefined && (
@@ -90,7 +91,6 @@ const ResetPassword: FC<Props> = memo((props) => {
                     </CardBody>
                 </Card>
             </Container>
-
 
         </DefaultLayout>
     );
