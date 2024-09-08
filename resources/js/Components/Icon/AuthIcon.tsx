@@ -1,14 +1,9 @@
-import { Image } from "@chakra-ui/react";
 import { FC } from "react";
+import { FaUserCheck } from "react-icons/fa6";
 
-type Props = {
-    w?: {};
-};
+const AuthIcon: FC = () => {
 
-const AuthIcon: FC<Props> = (props) => {
-    const { w = { base: 12 } } = props;
-
-    return <Image src="img/AuthIcon.png" w={w} />
+    return <FaUserCheck fontSize="24px" color="#0a0" />
 };
 
 export default AuthIcon;

@@ -1,14 +1,9 @@
-import { Image } from "@chakra-ui/react";
 import { FC } from "react";
+import { FaLock } from "react-icons/fa6";
 
-type Props = {
-    w?: {};
-};
+const GuestIcon: FC = () => {
 
-const GuestIcon: FC<Props> = (props) => {
-    const { w = { base: 12 } } = props;
-
-    return <Image src="img/GuestIcon.png" w={w} />
+    return <FaLock color="#c00" />
 };
 
 export default GuestIcon;

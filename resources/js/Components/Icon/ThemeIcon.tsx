@@ -8,7 +8,7 @@ type Props = {
 const ThemeIcon: FC<Props> = (props) => {
     const { w = { base: 56 } } = props;
 
-    return <Image src="img/AppImage.png" w={w} />
+    return <Image src="/img/AppImage.png" w={w} />
 };
 
 export default ThemeIcon;
