@@ -11,8 +11,8 @@ const DefaultLayout: FC<Props> = memo((props) => {
 
     return (
         <Box mb={16}>
-            <Center my={8}>
-                <ThemeIcon w={{ base: 32, md: 56 }} />
+            <Center my={16}>
+                <ThemeIcon w={{ base: 48, md: 56 }} />
             </Center>
 
             {children}

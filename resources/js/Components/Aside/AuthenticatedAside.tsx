@@ -23,8 +23,8 @@ const AuthenticatedAside: FC<Props> = memo((props) => {
                 w={60}
             >
                 <Box p={4} borderBottom="2px solid #55f">
-                    <ThemeIcon w={{ base: 32 }} />
-                    <Heading mt={4} size="sm">帳簿管理システム</Heading>
+                    <ThemeIcon w={{ base: 40 }} />
+                    <Heading mt={4} size="sm">MENU</Heading>
                 </Box>
 
                 <MenuAccordion
